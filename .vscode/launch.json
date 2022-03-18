@@ -6,12 +6,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Extension: Sample",
+      "name": "Launch Extension: pnpm-vscode-helper",
       "type": "extensionHost",
       "request": "launch",
-      "program": "${workspaceFolder}\\packages\\sample\\src\\index.js",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/sample"],
-      "outFiles": ["${workspaceFolder}/packages/sample/**/*.js"]
+      "program": "${workspaceFolder}\\packages\\pnpm-vscode-helper\\src\\index.js",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/pnpm-vscode-helper"
+      ],
+      "outFiles": ["${workspaceFolder}/packages/pnpm-vscode-helper/**/*.js"]
     },
     {
       "name": "Run Extension Tests",
@@ -19,8 +21,8 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}/packages/sample",
-        "--extensionTestsPath=${workspaceFolder}/packages/sample/test/suite/index"
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/pnpm-vscode-helper",
+        "--extensionTestsPath=${workspaceFolder}/packages/pnpm-vscode-helper/test/suite/index"
       ],
       "outFiles": ["${workspaceFolder}/out/test/**/*.js"]
     }

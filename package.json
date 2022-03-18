@@ -10,8 +10,10 @@
     "Other"
   ],
   "activationEvents": [
+    "*",
     "onCommand:pnpm-vscode-helper.helloWorld",
-    "onCommand:pnpm-vscode-helper.toggleLocale"
+    "onCommand:pnpm-vscode-helper.toggleLocale",
+    "onCommand:pnpm-vscode-helper.startTask"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -23,6 +25,10 @@
       {
         "command": "pnpm-vscode-helper.toggleLocale",
         "title": "Toggle Locale(切换语言)"
+      },
+      {
+        "command": "pnpm-vscode-helper.startTask",
+        "title": "Show Progress"
       }
     ]
   },

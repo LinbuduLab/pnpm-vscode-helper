@@ -1,4 +1,5 @@
 import { ExtensionRegistry } from './registry';
+import { ProgressHelper } from './utils/Progress';
 
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
@@ -14,6 +15,8 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   ExtensionRegistry.registerLocaleCommand(context);
+  ExtensionRegistry.registerCompletionProviders(context);
+  ProgressHelper.sample(context);
 }
 
 // this method is called when your extension is deactivated

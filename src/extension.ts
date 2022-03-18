@@ -16,6 +16,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   ExtensionRegistry.registerLocaleCommand(context);
   ExtensionRegistry.registerCompletionProviders(context);
+  ExtensionRegistry.registerCodeLenCommand(context);
+  ExtensionRegistry.registerCodeLensProvider(context);
+
   ProgressHelper.sample(context);
 }
 

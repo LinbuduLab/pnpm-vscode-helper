@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import { Locale } from '../commands/Locale';
+import { CodeLen } from '../commands/CodeLen';
 import { PnpmConfigurationCompletion } from '../languages/Completion';
+import { CodelensProvider } from '../Providers/CodeLen';
 import { Utils } from '../utils';
 
 export class ExtensionRegistry {
@@ -19,6 +21,23 @@ export class ExtensionRegistry {
     );
   }
 
+  public static registerCodeLenCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.commands.registerCommand(
+        Utils.composeCommand(CodeLen.EnableCodeLen.command),
+        CodeLen.EnableCodeLen.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(CodeLen.DisableCodeLen.command),
+        CodeLen.DisableCodeLen.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
+        CodeLen.CodeLenClickHandler.callback
+      )
+    );
+  }
+
   public static registerCompletionProviders(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       // Pnpm Configuration in .npmrc file
@@ -27,5 +46,9 @@ export class ExtensionRegistry {
       // Pnpm Worksapce Configuration in pnpm-workspace.yaml file
       // Pnpm File Configuration in .pnpmfile.cjs file
     );
+  }
+
+  public static registerCodeLensProvider(context: vscode.ExtensionContext) {
+    vscode.languages.registerCodeLensProvider('*', new CodelensProvider());
   }
 }

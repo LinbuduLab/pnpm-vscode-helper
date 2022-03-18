@@ -10,10 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*",
-    "onCommand:pnpm-vscode-helper.helloWorld",
-    "onCommand:pnpm-vscode-helper.toggleLocale",
-    "onCommand:pnpm-vscode-helper.startTask"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -29,8 +26,26 @@
       {
         "command": "pnpm-vscode-helper.startTask",
         "title": "Show Progress"
+      },
+      {
+        "title": "Enable CodeLens",
+        "command": "pnpm-vscode-helper.enableCodeLens",
+        "category": "PNPM CodeLens Sample"
+      },
+      {
+        "title": "Disable Codelens",
+        "command": "pnpm-vscode-helper.disableCodeLens",
+        "category": "PNPM CodeLens Sample"
       }
-    ]
+    ],
+    "configuration": {
+      "properties": {
+        "pnpm-vscode-helper.enableCodeLens": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

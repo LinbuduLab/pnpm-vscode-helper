@@ -3,7 +3,7 @@ export interface ICommandRegistry {
   callback: (...args: any[]) => any;
 }
 
-export class Constans {
+export class Constants {
   public static get ExtensionPrefix() {
     return 'pnpm-vscode-helper';
   }
@@ -11,6 +11,6 @@ export class Constans {
 
 export class Utils {
   public static composeCommand(command: string) {
-    return `${Constans.ExtensionPrefix}.${command}`;
+    return `${Constants.ExtensionPrefix}.${command}`;
   }
 }

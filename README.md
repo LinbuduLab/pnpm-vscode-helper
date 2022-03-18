@@ -1,70 +1,70 @@
-# VSCode Extension Monorepo
+# pnpm-vscode-helper README
 
-Develop VS Code extension in pnpm workspace.
+This is the README for your extension "pnpm-vscode-helper". After writing up a brief description, we recommend including the following sections.
 
-> **In fact, I'm just getting started with VS Code Extension, and this template is really just for exploring the various APIs of the extension separately, so if you want to develop fully functional extensions, this template is probably far from adequate, but PR is welcome!**
+## Features
 
-## Get Started
+Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-To use this template, you will need to:
+For example if there is an image subfolder under your extension project workspace:
 
-- Update [create-package script](scripts/create-package.ts) content, including `BASE_GITHUB_URL`, `PUBLISHER`, or any propertits you want to customize.
+\!\[feature X\]\(images/feature-x.png\)
 
-  ```typescript
-  const BASE_GITHUB_URL =
-    "https://github.com/LinbuduLab/vscode-extension-monorepo";
+> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
-  const PUBLISHER = "linbudu599";
-  ```
+## Requirements
 
-- Update [LICENSE](LICENSE) content, as in `create-package` execution we copy license file in root to specific package dir, so that we can publish extension by `vsix`,
-- Update [launch.json](.vscode/launch.json) content, configuration program should be speficified according to your actual package dir.
+If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-  ```json
-  {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Launch Extension: Sample",
-        "type": "extensionHost",
-        "request": "launch",
-        "program": "${workspaceFolder}\\packages\\sample\\src\\index.js",
-        "args": [
-          "--extensionDevelopmentPath=${workspaceFolder}/packages/sample"
-        ],
-        "outFiles": ["${workspaceFolder}/packages/sample/**/*.js"]
-      },
-      {
-        "name": "Run Extension Tests",
-        "type": "extensionHost",
-        "request": "launch",
-        "runtimeExecutable": "${execPath}",
-        "args": [
-          "--extensionDevelopmentPath=${workspaceFolder}/packages/sample",
-          "--extensionTestsPath=${workspaceFolder}/packages/sample/test/suite/index"
-        ],
-        "outFiles": ["${workspaceFolder}/out/test/**/*.js"]
-      }
-    ]
-  }
-  ```
+## Extension Settings
 
-- Run command below to build/package/publish your extension.
+Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
 
-  ```bash
-  pnpm run watch --filter 'sample'
-  pnpm run pkg --filter 'sample'
-  pnpm run pub --filter 'sample'
-  ```
+For example:
 
-## Release workflow
+This extension contributes the following settings:
 
-```bash
-pnpm add @changesets/cli -DW
-pnpm changeset init
-pnpm changeset
-pnpm changeset version
-pnpm install
-git add . && git commit -m 'feat: bump!'
-pnpm publish -r
-```
+* `myExtension.enable`: enable/disable this extension
+* `myExtension.thing`: set to `blah` to do something
+
+## Known Issues
+
+Calling out known issues can help limit users opening duplicate issues against your extension.
+
+## Release Notes
+
+Users appreciate release notes as you update your extension.
+
+### 1.0.0
+
+Initial release of ...
+
+### 1.0.1
+
+Fixed issue #.
+
+### 1.1.0
+
+Added features X, Y, and Z.
+
+-----------------------------------------------------------------------------------------------------------
+## Following extension guidelines
+
+Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+
+* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+
+## Working with Markdown
+
+**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+
+* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
+* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
+* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+
+### For more information
+
+* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
+* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+
+**Enjoy!**

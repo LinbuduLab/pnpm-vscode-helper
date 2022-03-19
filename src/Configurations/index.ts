@@ -75,10 +75,36 @@ class WorkspaceFeatureConfiguration implements IConfiguration<boolean> {
   }
 }
 
+class ShamefullyHoistConfiguration implements IConfiguration<boolean> {
+  public identifier = 'shamefullyHoist';
+
+  public defaultConfig = false;
+
+  public read() {
+    return (
+      vscode.workspace
+        .getConfiguration(Constants.ExtensionIdentifier)
+        .get<boolean>(this.identifier) ?? this.defaultConfig
+    );
+  }
+
+  public write(input: boolean): void {
+    vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .update(
+        this.identifier,
+        input,
+        vscode.ConfigurationTarget.WorkspaceFolder
+      );
+  }
+}
+
 export class ExtensionConfiguration {
   public static locale = new LocaleConfigurations();
 
   public static codeLen = new CodeLenConfiguration();
 
   public static workspace = new WorkspaceFeatureConfiguration();
+
+  public static shamefullyHoist = new ShamefullyHoistConfiguration();
 }

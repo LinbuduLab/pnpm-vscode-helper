@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { Hover } from 'vscode';
 
 export class ExtensionHoverProvider {
   public static Sample() {

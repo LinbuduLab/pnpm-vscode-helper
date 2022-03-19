@@ -10,11 +10,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   ExtensionRegistry.registerLocaleCommand(context);
   ExtensionRegistry.registerCompletionProviders(context);
-  ExtensionRegistry.registerCodeLenCommand(context);
-  ExtensionRegistry.registerCodeLensProvider(context);
+  // ExtensionRegistry.registerCodeLenCommand(context);
+  // ExtensionRegistry.registerCodeLensProvider(context);
   ExtensionRegistry.registerWorkspaceCommand(context);
   ExtensionRegistry.registerScanWorkspaceCommand(context);
   ExtensionRegistry.registerHoverProvider(context);
+  ExtensionRegistry.registerDefinitionProvider(context);
 
   ExtensionRegistry.preProcess(context);
 

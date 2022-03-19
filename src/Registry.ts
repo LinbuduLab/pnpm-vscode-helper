@@ -10,6 +10,8 @@ import { SampleHoverProvider } from './Languages/Hover';
 import * as fs from 'fs';
 import * as path from 'path';
 import { ExtensionConfiguration } from './Configurations';
+import { PackageJsonHoverProvider } from './Providers/Hover';
+import { PackageJsonDefinitionProvider } from './Providers/Definition';
 
 export class ExtensionRegistry {
   public static registerLocaleCommand(context: vscode.ExtensionContext) {
@@ -79,46 +81,17 @@ export class ExtensionRegistry {
   public static registerHoverProvider(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       vscode.languages.registerHoverProvider(
-        // {
-        //   pattern: 'pnpm-workspace.yaml',
-        // },
-        'json',
-        {
-          provideHover(document, position, token) {
-            const fileName = document.fileName;
-            const workDir = path.dirname(fileName);
-            const word = document.getText(
-              document.getWordRangeAtPosition(position)
-            );
+        PackageJsonHoverProvider.selector,
+        new PackageJsonHoverProvider()
+      )
+    );
+  }
 
-            if (/\/package\.json$/.test(fileName)) {
-              console.log('进入provideHover方法');
-              const json = document.getText();
-              if (
-                new RegExp(
-                  `"(dependencies|devDependencies)":\\s*?\\{[\\s\\S]*?${word.replace(
-                    /\//g,
-                    '\\/'
-                  )}[\\s\\S]*?\\}`,
-                  'gm'
-                ).test(json)
-              ) {
-                let destPath = `${workDir}/node_modules/${word.replace(
-                  /"/g,
-                  ''
-                )}/package.json`;
-                if (fs.existsSync(destPath)) {
-                  const content = require(destPath);
-                  console.log('hover已生效');
-                  // hover内容支持markdown语法
-                  return new vscode.Hover(
-                    `* **名称**：${content.name}\n* **版本**：${content.version}\n* **许可协议**：${content.license}`
-                  );
-                }
-              }
-            }
-          },
-        }
+  public static registerDefinitionProvider(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.languages.registerDefinitionProvider(
+        PackageJsonDefinitionProvider.selector,
+        new PackageJsonDefinitionProvider()
       )
     );
   }
@@ -138,7 +111,7 @@ export class ExtensionRegistry {
     const content = (await vscode.workspace.fs.readFile(npmRC[0])).toString();
 
     // todo: .rc parser
-    const [, _] = content.split('shamefully-hoist=');
+    const [, _ = ''] = content.split('shamefully-hoist=');
 
     const shamefullyHoistEnabled = _.startsWith('true');
 

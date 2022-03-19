@@ -78,8 +78,8 @@
           "default": false
         },
         "pnpm-vscode-helper.workspacePackages": {
-          "type": "array",
-          "default": []
+          "type": "object",
+          "default": {}
         }
       }
     }

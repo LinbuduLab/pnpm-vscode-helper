@@ -8,21 +8,43 @@ import { ExtensionConfiguration } from '../Configurations';
  * - select a behavior, choose the package
  */
 export class Package {
+  public static operations: string[] = [
+    'self',
+    'withDependencies',
+    'withDependents',
+  ];
+
   public static get SelectPackage(): ICommandRegistry {
     return {
       command: 'select-workspace-package',
-      callback: (args: any) => {
-        const validPackages = ExtensionConfiguration.packages.read();
+      callback: async (args: any) => {
+        const validPackages = Object.values(
+          ExtensionConfiguration.packages.read()
+        );
 
-        vscode.window.showQuickPick(validPackages).then((v) => {
-          if (!v) {
-            return;
-          }
+        const selectedTargetPackage = await vscode.window.showQuickPick(
+          validPackages
+        );
 
-          vscode.window.showInformationMessage(
-            `package >>> ${v} <<< selected.`
-          );
-        });
+        if (!selectedTargetPackage) {
+          return;
+        }
+
+        vscode.window.showInformationMessage(
+          `package >>> ${selectedTargetPackage} <<< selected.`
+        );
+
+        const selectedOperations = await vscode.window.showQuickPick(
+          Package.operations
+        );
+
+        if (!selectedOperations) {
+          return;
+        }
+
+        vscode.window.showInformationMessage(
+          `operation >>> ${selectedOperations} <<< selected.`
+        );
       },
     };
   }

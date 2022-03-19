@@ -36,7 +36,7 @@ export class ExtensionHooks {
     const packagesDirPatterns = parsed.packages;
 
     const packageDirs: string[] = [];
-    const packageInfos: string[] = [];
+    const packageInfos: Record<string, string> = {};
 
     for (const dirPattern of packagesDirPatterns) {
       const wsPath = Utils.resolveCurrentWorkspaceAbsolutePath();
@@ -71,7 +71,8 @@ export class ExtensionHooks {
       );
 
       if (content.name) {
-        packageInfos.push(content.name);
+        // packageInfos.push(content.name);
+        packageInfos[packageDir] = content.name;
       }
     }
 

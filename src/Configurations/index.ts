@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { Constants } from '../utils';
+import { Locale } from '../Utils/typings';
+import { Constants } from '../Utils';
 
 abstract class IConfiguration<T> {
   public abstract identifier: string;
@@ -30,8 +31,6 @@ class CodeLenConfiguration implements IConfiguration<boolean> {
       .update(this.identifier, input, true);
   }
 }
-
-export type Locale = 'en-US' | 'zh-CN';
 
 class LocaleConfigurations implements IConfiguration<Locale> {
   public identifier = 'locale';

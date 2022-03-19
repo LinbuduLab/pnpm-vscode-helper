@@ -18,11 +18,6 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(Locale.ToggleLocale.command),
         Locale.ToggleLocale.callback
-      ),
-      // Sample
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Locale.Sample.command),
-        Locale.Sample.callback
       )
     );
   }

@@ -18,3 +18,5 @@ export class Utils {
     return `${Constants.ExtensionIdentifier}.${command}`;
   }
 }
+
+export class ProjectWorkspaceScanner {}

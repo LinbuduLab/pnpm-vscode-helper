@@ -18,14 +18,9 @@ export class Package {
     return {
       command: 'select-workspace-package',
       callback: async (args: any) => {
-        const validPackages = Object.values(
-          ExtensionConfiguration.packages.read()
-        );
-
         const selectedTargetPackage = await vscode.window.showQuickPick(
-          validPackages
+          Object.keys(ExtensionConfiguration.packages.read())
         );
-
         if (!selectedTargetPackage) {
           return;
         }

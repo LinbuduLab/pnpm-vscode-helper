@@ -1,14 +1,4 @@
-import {
-  ExtensionContext,
-  StatusBarAlignment,
-  window,
-  StatusBarItem,
-  Selection,
-  workspace,
-  TextEditor,
-  commands,
-  ProgressLocation,
-} from 'vscode';
+import { ExtensionContext, window, commands, ProgressLocation } from 'vscode';
 
 export class ProgressHelper {
   public static sample(context: ExtensionContext) {

@@ -5,6 +5,7 @@ import { Workspace } from './Commands/Workspace';
 import { ScanWorkspace } from './Commands/Scanner';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
+import { Install } from './Commands/Install';
 import { PnpmConfigurationCompletion } from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
 import { Utils } from './utils';
@@ -107,6 +108,19 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(Package.SelectPackage.command),
         Package.SelectPackage.callback
+      )
+    );
+  }
+
+  public static registerInstallCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Install.InstallWorkspaceRootDepsOnly.command),
+        Install.InstallWorkspaceRootDepsOnly.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Install.InstallSelectPackagesDepsOnly.command),
+        Install.InstallSelectPackagesDepsOnly.callback
       )
     );
   }

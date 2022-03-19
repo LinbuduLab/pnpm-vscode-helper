@@ -6,14 +6,42 @@ export class Install {
   public static get InstallWorkspaceRootDepsOnly(): ICommandRegistry {
     return {
       command: 'install-workspace-root-deps',
-      callback: async (args: any) => {},
+      callback: async (args: any) => {
+        const { dependencies = {}, devDependencies = {} } =
+          Utils.readPackageJson();
+        const { dependenciesWithVersion, devDependenciesWithVersion } =
+          Utils.processDepsRecord(dependencies, devDependencies);
+      },
     };
   }
 
-  public static get CheckDependenceUpdate(): ICommandRegistry {
+  // public static get CheckUpdate(): ICommandRegistry {
+  //   return {
+  //     command: 'install-only-selected-packages-deps',
+  //     callback: async (args: any) => {},
+  //   };
+  // }
+
+  public static get InstallSelectPackagesDepsOnly(): ICommandRegistry {
     return {
-      command: 'install-workspace-root-deps',
-      callback: async (args: any) => {},
+      command: 'install-selected-packages-deps',
+      callback: async (args: any) => {
+        const pkgs = ExtensionConfiguration.packages.read();
+        const selectedTargetPackage = await vscode.window.showQuickPick(
+          Object.keys(pkgs)
+        );
+
+        if (!selectedTargetPackage) {
+          return;
+        }
+
+        const { dependencies, devDependencies } = Utils.readPackageJson(
+          pkgs[selectedTargetPackage]
+        );
+
+        const { dependenciesWithVersion, devDependenciesWithVersion } =
+          Utils.processDepsRecord(dependencies, devDependencies);
+      },
     };
   }
 }

@@ -34,6 +34,14 @@
         "title": "Hello World"
       },
       {
+        "command": "pnpm-vscode-helper.install-workspace-root-deps",
+        "title": "Install workspace root dependencies only"
+      },
+      {
+        "command": "pnpm-vscode-helper.install-selected-packages-deps",
+        "title": "Install selected package dependencies only"
+      },
+      {
         "command": "pnpm-vscode-helper.toggleLocale",
         "title": "Toggle Locale(切换语言)"
       },
@@ -125,6 +133,7 @@
     "consola": "^2.15.3",
     "globby": "^11.0.3",
     "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
     "rc-parser": "^1.0.2"
   }
 }

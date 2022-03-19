@@ -1,11 +1,13 @@
 import * as vscode from 'vscode';
-import { IParsedPNPMWorkspaceYAMLContent } from '../Commands/Scanner';
-import { ExtensionConfiguration } from '../Configurations';
 import * as yaml from 'js-yaml';
 import * as globby from 'globby';
-import { Utils } from '../utils';
+import * as path from 'path';
+
 import { PackageJson } from 'type-fest';
-import path = require('path');
+
+import { IParsedPNPMWorkspaceYAMLContent } from '../Commands/Scanner';
+import { ExtensionConfiguration } from '../Configurations';
+import { Utils } from '../Utils';
 
 export class ExtensionHooks {
   public static async pre(context: vscode.ExtensionContext) {
@@ -15,6 +17,18 @@ export class ExtensionHooks {
   }
 
   public static async preCollectWorkspacePackages() {
+    // vscode.window.withProgress(
+    //   {
+    //     location: vscode.ProgressLocation.Notification,
+    //     title: 'I am long running!',
+    //     cancellable: true,
+    //   },
+    //   (progress, token) => {
+    //     return new Promise(async (resolve, reject) => {
+    //       resolve(void 0);
+    //     });
+    //   }
+    // );
     const pnpmWorkspaceConfigFile = await vscode.workspace.findFiles(
       'pnpm-workspace.yaml',
       '**/node_modules/**',
@@ -72,8 +86,7 @@ export class ExtensionHooks {
       );
 
       if (content.name) {
-        // packageInfos.push(content.name);
-        packageInfos[packageDir] = content.name;
+        packageInfos[content.name] = packageDir;
       }
     }
 
@@ -106,15 +119,15 @@ export class ExtensionHooks {
   }
 
   public static async experimentalWorks(context: vscode.ExtensionContext) {
-    let NEXT_TERM_ID = 1;
-
-    context.subscriptions.push(
-      vscode.commands.registerCommand('terminalTest.createAndSend', () => {
-        const terminal = vscode.window.createTerminal(
-          `Ext Terminal #${NEXT_TERM_ID++}`
-        );
-        terminal.sendText("echo 'Sent text immediately after creating'");
-      })
-    );
+    // let NEXT_TERM_ID = 1;
+    // context.subscriptions.push(
+    //   vscode.commands.registerCommand('terminalTest.createAndSend', () => {
+    //     const terminal = vscode.window.createTerminal(
+    //       `Ext Terminal #${NEXT_TERM_ID++}`
+    //     );
+    //     terminal.sendText("echo 'Sent text immediately after creating'");
+    //   })
+    // );
+    Utils.readPackageJson();
   }
 }

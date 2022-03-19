@@ -1,3 +1,4 @@
+import { PackageJson } from 'type-fest';
 import * as vscode from 'vscode';
 
 export interface ICommandRegistry {
@@ -59,6 +60,35 @@ export class Utils {
     vscode.workspace.openTextDocument(fileUri);
 
     vscode.window.showInformationMessage(`Created file: ${filePath}`);
+  }
+
+  public static readPackageJson(packageDir?: string): PackageJson {
+    const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
+    const packageJsonPath = `${packageDir ?? wsPath}/package.json`;
+    const packageJson = require(packageJsonPath);
+    return packageJson;
+  }
+
+  public static processDepsRecord(
+    dependencies: Record<string, string> = {},
+    devDependencies: Record<string, string> = {}
+  ) {
+    return {
+      dependenciesWithVersion: [...Object.entries(dependencies)].reduce<
+        string[]
+      >((prev, [identifier, version]) => {
+        return ['workspace:', 'file:'].includes(version)
+          ? prev
+          : prev.concat(`${identifier}@${version}`);
+      }, []),
+      devDependenciesWithVersion: [...Object.entries(devDependencies)].reduce<
+        string[]
+      >((prev, [identifier, version]) => {
+        return ['workspace:', 'file:'].includes(version)
+          ? prev
+          : prev.concat(`${identifier}@${version}`);
+      }, []),
+    };
   }
 }
 

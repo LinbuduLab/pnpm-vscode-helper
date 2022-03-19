@@ -36,9 +36,7 @@ export class ExtensionHooks {
     const packagesDirPatterns = parsed.packages;
 
     const packageDirs: string[] = [];
-
-    // dir -> package name
-    const packageInfoMap: Record<string, string> = {};
+    const packageInfos: string[] = [];
 
     for (const dirPattern of packagesDirPatterns) {
       const wsPath = Utils.resolveCurrentWorkspaceAbsolutePath();
@@ -73,15 +71,11 @@ export class ExtensionHooks {
       );
 
       if (content.name) {
-        packageInfoMap[packageDir] = content.name;
+        packageInfos.push(content.name);
       }
     }
 
-    ExtensionConfiguration.packages.write(packageInfoMap);
-
-    vscode.window.showInformationMessage(
-      ExtensionConfiguration.packages.read().toString()
-    );
+    ExtensionConfiguration.packages.write(packageInfos);
   }
 
   public static async preCheckShamefullyHoistConfig() {

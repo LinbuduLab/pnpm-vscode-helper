@@ -17,6 +17,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // ExtensionRegistry.registerCodeLensProvider(context);
   ExtensionRegistry.registerWorkspaceCommand(context);
   ExtensionRegistry.registerCreatorCommand(context);
+  ExtensionRegistry.registerPackageCommand(context);
   ExtensionRegistry.registerScanWorkspaceCommand(context);
   ExtensionRegistry.registerHoverProvider(context);
   ExtensionRegistry.registerDefinitionProvider(context);

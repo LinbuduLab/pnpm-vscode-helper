@@ -56,6 +56,11 @@
         "title": "Create pnpm-workspace.yaml config with pnpm configuration",
         "command": "pnpm-vscode-helper.create-pnpm-workspace-config",
         "category": "PNPM W Sample"
+      },
+      {
+        "title": "Select workspace packages",
+        "command": "pnpm-vscode-helper.select-workspace-package",
+        "category": "PNPM W Sample"
       }
     ],
     "configuration": {
@@ -69,10 +74,10 @@
           "default": "en-US"
         },
         "pnpm-vscode-helper.shamefullyHoist": {
-          "type": "string",
-          "default": "false"
+          "type": "boolean",
+          "default": false
         },
-        "pnpm-vscode-helper.packages": {
+        "pnpm-vscode-helper.workspacePackages": {
           "type": "array",
           "default": []
         }

@@ -91,18 +91,14 @@ class ShamefullyHoistConfiguration implements IConfiguration<boolean> {
   public write(input: boolean): void {
     vscode.workspace
       .getConfiguration(Constants.ExtensionIdentifier)
-      .update(
-        this.identifier,
-        input,
-        vscode.ConfigurationTarget.WorkspaceFolder
-      );
+      .update(this.identifier, input, vscode.ConfigurationTarget.Workspace);
   }
 }
 
 class WorkspacePackagesConfiguration
   implements IConfiguration<Record<string, string>>
 {
-  public identifier = 'packages';
+  public identifier = 'workspacePackages';
 
   public defaultConfig = {};
 
@@ -110,18 +106,14 @@ class WorkspacePackagesConfiguration
     return (
       vscode.workspace
         .getConfiguration(Constants.ExtensionIdentifier)
-        .get<string[]>(this.identifier) ?? this.defaultConfig
+        .get<Record<string, string>>(this.identifier) ?? this.defaultConfig
     );
   }
 
   public write(input: Record<string, string>): void {
     vscode.workspace
       .getConfiguration(Constants.ExtensionIdentifier)
-      .update(
-        this.identifier,
-        input,
-        vscode.ConfigurationTarget.WorkspaceFolder
-      );
+      .update(this.identifier, input, vscode.ConfigurationTarget.Workspace);
   }
 }
 

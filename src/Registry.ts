@@ -3,6 +3,7 @@ import { Locale } from './Commands/Locale';
 import { CodeLen } from './Commands/CodeLen';
 import { Workspace } from './Commands/Workspace';
 import { ScanWorkspace } from './Commands/Scanner';
+import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { PnpmConfigurationCompletion } from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
@@ -102,6 +103,15 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(Creator.CreatePNPMWorkspaceConfig.command),
         Creator.CreatePNPMWorkspaceConfig.callback
+      )
+    );
+  }
+
+  public static registerPackageCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Package.SelectPackage.command),
+        Package.SelectPackage.callback
       )
     );
   }

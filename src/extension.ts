@@ -9,7 +9,7 @@ export async function activate(context: vscode.ExtensionContext) {
     'Congratulations, your extension "pnpm-vscode-helper" is now active!'
   );
 
-  await ExtensionHooks.pre();
+  await ExtensionHooks.pre(context);
 
   ExtensionRegistry.registerLocaleCommand(context);
   ExtensionRegistry.registerCompletionProviders(context);

@@ -8,7 +8,8 @@ import { PackageJson } from 'type-fest';
 import path = require('path');
 
 export class ExtensionHooks {
-  public static async pre() {
+  public static async pre(context: vscode.ExtensionContext) {
+    await ExtensionHooks.experimentalWorks(context);
     await ExtensionHooks.preCheckShamefullyHoistConfig();
     await ExtensionHooks.preCollectWorkspacePackages();
   }
@@ -102,5 +103,18 @@ export class ExtensionHooks {
 
     shamefullyHoistEnabled &&
       vscode.window.showInformationMessage('shamefully-hoist enabled.');
+  }
+
+  public static async experimentalWorks(context: vscode.ExtensionContext) {
+    let NEXT_TERM_ID = 1;
+
+    context.subscriptions.push(
+      vscode.commands.registerCommand('terminalTest.createAndSend', () => {
+        const terminal = vscode.window.createTerminal(
+          `Ext Terminal #${NEXT_TERM_ID++}`
+        );
+        terminal.sendText("echo 'Sent text immediately after creating'");
+      })
+    );
   }
 }

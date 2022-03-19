@@ -15,7 +15,20 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "terminal": {
+      "profiles": [
+        {
+          "id": "terminalTest.terminal-profile",
+          "icon": "terminal",
+          "title": "Terminal API Profile"
+        }
+      ]
+    },
     "commands": [
+      {
+        "command": "terminalTest.createAndSend",
+        "title": "Terminal API: Create Terminal and Immediately Send"
+      },
       {
         "command": "pnpm-vscode-helper.helloWorld",
         "title": "Hello World"

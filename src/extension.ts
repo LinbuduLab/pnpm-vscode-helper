@@ -1,12 +1,15 @@
 import { ExtensionRegistry } from './Registry';
+import { ExtensionHooks } from './Hooks';
 import { ProgressHelper } from './utils/Progress';
 
 import * as vscode from 'vscode';
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
   console.log(
     'Congratulations, your extension "pnpm-vscode-helper" is now active!'
   );
+
+  await ExtensionHooks.pre();
 
   ExtensionRegistry.registerLocaleCommand(context);
   ExtensionRegistry.registerCompletionProviders(context);
@@ -16,8 +19,6 @@ export function activate(context: vscode.ExtensionContext) {
   ExtensionRegistry.registerScanWorkspaceCommand(context);
   ExtensionRegistry.registerHoverProvider(context);
   ExtensionRegistry.registerDefinitionProvider(context);
-
-  ExtensionRegistry.preProcess(context);
 
   ProgressHelper.sample(context);
 }

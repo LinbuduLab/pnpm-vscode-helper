@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry, Constants } from '../utils';
+import { Constants } from '../utils';
 
 abstract class IConfiguration<T> {
   public abstract identifier: string;
@@ -99,6 +99,30 @@ class ShamefullyHoistConfiguration implements IConfiguration<boolean> {
   }
 }
 
+class WorkspacePackagesConfiguration implements IConfiguration<string[]> {
+  public identifier = 'packages';
+
+  public defaultConfig = [];
+
+  public read() {
+    return (
+      vscode.workspace
+        .getConfiguration(Constants.ExtensionIdentifier)
+        .get<string[]>(this.identifier) ?? this.defaultConfig
+    );
+  }
+
+  public write(input: string[]): void {
+    vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .update(
+        this.identifier,
+        input,
+        vscode.ConfigurationTarget.WorkspaceFolder
+      );
+  }
+}
+
 export class ExtensionConfiguration {
   public static locale = new LocaleConfigurations();
 
@@ -107,4 +131,6 @@ export class ExtensionConfiguration {
   public static workspace = new WorkspaceFeatureConfiguration();
 
   public static shamefullyHoist = new ShamefullyHoistConfiguration();
+
+  public static packages = new WorkspacePackagesConfiguration();
 }

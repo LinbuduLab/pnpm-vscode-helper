@@ -57,6 +57,14 @@
         "pnpm-vscode-helper.locale": {
           "type": "string",
           "default": "en-US"
+        },
+        "pnpm-vscode-helper.shamefullyHoist": {
+          "type": "string",
+          "default": "false"
+        },
+        "pnpm-vscode-helper.packages": {
+          "type": "array",
+          "default": []
         }
       }
     }
@@ -86,6 +94,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "consola": "^2.15.3",
     "js-yaml": "^4.1.0",
     "rc-parser": "^1.0.2"
   }

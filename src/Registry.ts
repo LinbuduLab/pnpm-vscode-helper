@@ -95,29 +95,4 @@ export class ExtensionRegistry {
       )
     );
   }
-
-  public static async preProcess(context: vscode.ExtensionContext) {
-    const npmRC = await vscode.workspace.findFiles(
-      '.npmrc',
-      '**/node_modules/**',
-      1
-    );
-    if (!npmRC.length) {
-      // todo: remove
-      vscode.window.showWarningMessage('file .npmrc is not found');
-      return;
-    }
-
-    const content = (await vscode.workspace.fs.readFile(npmRC[0])).toString();
-
-    // todo: .rc parser
-    const [, _ = ''] = content.split('shamefully-hoist=');
-
-    const shamefullyHoistEnabled = _.startsWith('true');
-
-    ExtensionConfiguration.shamefullyHoist.write(shamefullyHoistEnabled);
-
-    shamefullyHoistEnabled &&
-      vscode.window.showInformationMessage('shamefully-hoist enabled.');
-  }
 }

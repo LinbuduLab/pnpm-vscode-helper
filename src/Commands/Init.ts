@@ -2,10 +2,10 @@ import * as vscode from 'vscode';
 import { ICommandRegistry, Constants, Utils } from '../utils';
 import { ExtensionConfiguration } from '../Configurations';
 
-export class GUI {
-  public static get OpenExtensionConfigureGUI(): ICommandRegistry {
+export class Init {
+  public static get InitWithInteractive(): ICommandRegistry {
     return {
-      command: 'open-configure-gui',
+      command: 'init',
       callback: async (args: any) => {},
     };
   }

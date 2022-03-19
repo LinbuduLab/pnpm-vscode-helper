@@ -46,6 +46,16 @@
         "title": "Sync Project Workspace Info",
         "command": "pnpm-vscode-helper.scan-workspace",
         "category": "PNPM W Sample"
+      },
+      {
+        "title": "Create .npmrc config with pnpm configuration",
+        "command": "pnpm-vscode-helper.create-npm-rc-config",
+        "category": "PNPM W Sample"
+      },
+      {
+        "title": "Create pnpm-workspace.yaml config with pnpm configuration",
+        "command": "pnpm-vscode-helper.create-pnpm-workspace-config",
+        "category": "PNPM W Sample"
       }
     ],
     "configuration": {

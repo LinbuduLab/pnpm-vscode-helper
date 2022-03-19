@@ -3,13 +3,10 @@ import { Locale } from './Commands/Locale';
 import { CodeLen } from './Commands/CodeLen';
 import { Workspace } from './Commands/Workspace';
 import { ScanWorkspace } from './Commands/Scanner';
+import { Creator } from './Commands/Creator';
 import { PnpmConfigurationCompletion } from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
 import { Utils } from './utils';
-import { SampleHoverProvider } from './Languages/Hover';
-import * as fs from 'fs';
-import * as path from 'path';
-import { ExtensionConfiguration } from './Configurations';
 import { PackageJsonHoverProvider } from './Providers/Hover';
 import { PackageJsonDefinitionProvider } from './Providers/Definition';
 
@@ -92,6 +89,19 @@ export class ExtensionRegistry {
       vscode.languages.registerDefinitionProvider(
         PackageJsonDefinitionProvider.selector,
         new PackageJsonDefinitionProvider()
+      )
+    );
+  }
+
+  public static registerCreatorCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Creator.CreateNPMRCConfig.command),
+        Creator.CreateNPMRCConfig.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Creator.CreatePNPMWorkspaceConfig.command),
+        Creator.CreatePNPMWorkspaceConfig.callback
       )
     );
   }

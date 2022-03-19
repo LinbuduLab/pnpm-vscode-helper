@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { ICommandRegistry, Constants, Utils } from '../utils';
-import { CodeLen } from '../commands/CodeLen';
+import { CodeLen } from '../Commands/CodeLen';
 
 /**
  * CodelensProvider

@@ -1,14 +1,13 @@
 import * as vscode from 'vscode';
 import { ICommandRegistry, Constants } from '../utils';
+import { ExtensionConfiguration } from '../Configurations';
 
 export class CodeLen {
   public static get EnableCodeLen(): ICommandRegistry {
     return {
       command: 'enableCodeLens',
       callback: () => {
-        vscode.workspace
-          .getConfiguration(Constants.ExtensionPrefix)
-          .update('enableCodeLens', true, true);
+        ExtensionConfiguration.codeLenConfig.write(true);
 
         vscode.window.showInformationMessage(`PNPM CodeLens Enabled.`);
       },
@@ -19,9 +18,7 @@ export class CodeLen {
     return {
       command: 'disableCodeLens',
       callback: () => {
-        vscode.workspace
-          .getConfiguration(Constants.ExtensionPrefix)
-          .update('enableCodeLens', false, true);
+        ExtensionConfiguration.codeLenConfig.write(false);
 
         vscode.window.showInformationMessage(`PNPM CodeLens Disabled.`);
       },

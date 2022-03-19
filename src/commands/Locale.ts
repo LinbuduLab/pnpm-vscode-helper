@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { ICommandRegistry } from '../utils';
+import { ExtensionConfiguration } from '../Configurations';
 
 export class Locale {
   public static get Sample(): ICommandRegistry {
@@ -17,7 +18,10 @@ export class Locale {
     return {
       command: 'toggleLocale',
       callback: () => {
-        vscode.window.showInformationMessage('Locale Changed!');
+        ExtensionConfiguration.localeConfig.write('zh-CN');
+        vscode.window.showInformationMessage(
+          'Locale Changed! ' + ExtensionConfiguration.localeConfig.read()
+        );
       },
     };
   }

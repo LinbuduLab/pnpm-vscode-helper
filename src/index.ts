@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
-import { Locale } from '../commands/Locale';
-import { CodeLen } from '../commands/CodeLen';
-import { PnpmConfigurationCompletion } from '../languages/Completion';
-import { CodelensProvider } from '../Providers/CodeLen';
-import { Utils } from '../utils';
+import { Locale } from './Commands/Locale';
+import { CodeLen } from './Commands/CodeLen';
+import { PnpmConfigurationCompletion } from './Languages/Completion';
+import { CodelensProvider } from './Providers/CodeLen';
+import { Utils } from './utils';
 
 export class ExtensionRegistry {
   public static registerLocaleCommand(context: vscode.ExtensionContext) {

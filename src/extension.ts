@@ -1,4 +1,4 @@
-import { ExtensionRegistry } from './registry';
+import { ExtensionRegistry } from '.';
 import { ProgressHelper } from './utils/Progress';
 
 // The module 'vscode' contains the VS Code extensibility API

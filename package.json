@@ -43,6 +43,10 @@
         "pnpm-vscode-helper.enableCodeLens": {
           "type": "boolean",
           "default": true
+        },
+        "pnpm-vscode-helper.locale": {
+          "type": "string",
+          "default": "en-US"
         }
       }
     }

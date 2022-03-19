@@ -14,14 +14,24 @@ export class Locale {
     };
   }
 
+  public static get supportedLocales() {
+    return ['en-US', 'zh-CN'];
+  }
+
   public static get ToggleLocale(): ICommandRegistry {
     return {
       command: 'toggleLocale',
       callback: () => {
-        ExtensionConfiguration.localeConfig.write('zh-CN');
-        vscode.window.showInformationMessage(
-          'Locale Changed! ' + ExtensionConfiguration.localeConfig.read()
-        );
+        vscode.window.showQuickPick(Locale.supportedLocales).then((v) => {
+          if (!v) {
+            return;
+          }
+
+          ExtensionConfiguration.locale.write(v);
+          vscode.window.showInformationMessage(
+            'Locale Changed! ' + ExtensionConfiguration.locale.read()
+          );
+        });
       },
     };
   }

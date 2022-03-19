@@ -19,40 +19,42 @@ class CodeLenConfiguration implements IConfiguration<boolean> {
   public read() {
     return (
       vscode.workspace
-        .getConfiguration(Constants.ExtensionPrefix)
+        .getConfiguration(Constants.ExtensionIdentifier)
         .get<boolean>(this.identifier) ?? this.defaultConfig
     );
   }
 
   public write(input: boolean): void {
     vscode.workspace
-      .getConfiguration(Constants.ExtensionPrefix)
+      .getConfiguration(Constants.ExtensionIdentifier)
       .update(this.identifier, input, true);
   }
 }
 
-class LocaleConfigurations implements IConfiguration<string> {
+type Locale = 'en-US' | 'zh-CN';
+
+class LocaleConfigurations implements IConfiguration<Locale> {
   public identifier = 'locale';
 
-  public defaultConfig = 'en-US';
+  public defaultConfig: Locale = 'en-US';
 
   public read() {
     return (
       vscode.workspace
-        .getConfiguration(Constants.ExtensionPrefix)
-        .get<string>(this.identifier) ?? this.defaultConfig
+        .getConfiguration(Constants.ExtensionIdentifier)
+        .get<Locale>(this.identifier) ?? this.defaultConfig
     );
   }
 
   public write(input: string): void {
     vscode.workspace
-      .getConfiguration(Constants.ExtensionPrefix)
+      .getConfiguration(Constants.ExtensionIdentifier)
       .update(this.identifier, input, true);
   }
 }
 
 export class ExtensionConfiguration {
-  public static localeConfig = new LocaleConfigurations();
+  public static locale = new LocaleConfigurations();
 
-  public static codeLenConfig = new CodeLenConfiguration();
+  public static codeLen = new CodeLenConfiguration();
 }

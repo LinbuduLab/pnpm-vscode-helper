@@ -7,9 +7,12 @@ export class CodeLen {
     return {
       command: 'enableCodeLens',
       callback: () => {
-        ExtensionConfiguration.codeLenConfig.write(true);
+        ExtensionConfiguration.codeLen.write(true);
 
-        vscode.window.showInformationMessage(`PNPM CodeLens Enabled.`);
+        const locale = ExtensionConfiguration.locale.read();
+        vscode.window.showInformationMessage(
+          locale === 'en-US' ? `PNPM CodeLens Enabled.` : 'PNPM 智能提示已启用'
+        );
       },
     };
   }
@@ -18,9 +21,12 @@ export class CodeLen {
     return {
       command: 'disableCodeLens',
       callback: () => {
-        ExtensionConfiguration.codeLenConfig.write(false);
+        ExtensionConfiguration.codeLen.write(false);
 
-        vscode.window.showInformationMessage(`PNPM CodeLens Disabled.`);
+        const locale = ExtensionConfiguration.locale.read();
+        vscode.window.showInformationMessage(
+          locale === 'en-US' ? `PNPM CodeLens Disabled.` : 'PNPM 智能提示已禁用'
+        );
       },
     };
   }

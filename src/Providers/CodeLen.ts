@@ -30,7 +30,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
   ): vscode.CodeLens[] | Thenable<vscode.CodeLens[]> {
     if (
       vscode.workspace
-        .getConfiguration(Constants.ExtensionPrefix)
+        .getConfiguration(Constants.ExtensionIdentifier)
         .get(CodeLen.EnableCodeLen.command, true)
     ) {
       this.codeLenses = [];
@@ -60,7 +60,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
   ) {
     if (
       vscode.workspace
-        .getConfiguration(Constants.ExtensionPrefix)
+        .getConfiguration(Constants.ExtensionIdentifier)
         .get(CodeLen.EnableCodeLen.command, true)
     ) {
       codeLens.command = {

@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
   ExtensionRegistry.registerCompletionProviders(context);
   ExtensionRegistry.registerCodeLenCommand(context);
   ExtensionRegistry.registerCodeLensProvider(context);
+  ExtensionRegistry.registerWorkspaceCommand(context);
 
   ProgressHelper.sample(context);
 }

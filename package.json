@@ -36,6 +36,10 @@
         "title": "Disable Codelens",
         "command": "pnpm-vscode-helper.disableCodeLens",
         "category": "PNPM CodeLens Sample"
+      },
+      {
+        "title": "Toggle Workspace Featrue Status",
+        "command": "pnpm-vscode-helper.toggleWorkspaceFeature"
       }
     ],
     "configuration": {

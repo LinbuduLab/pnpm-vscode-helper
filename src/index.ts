@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { Locale } from './Commands/Locale';
 import { CodeLen } from './Commands/CodeLen';
+import { Workspace } from './Commands/Workspace';
 import { PnpmConfigurationCompletion } from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
 import { Utils } from './utils';
@@ -34,6 +35,15 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
         CodeLen.CodeLenClickHandler.callback
+      )
+    );
+  }
+
+  public static registerWorkspaceCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Workspace.ToggleWorkspaceFeatureStatus.command),
+        Workspace.ToggleWorkspaceFeatureStatus.callback
       )
     );
   }

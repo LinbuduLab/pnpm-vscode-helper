@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 import { ICommandRegistry } from '../utils';
-import { ExtensionConfiguration } from '../Configurations';
+import {
+  ExtensionConfiguration,
+  Locale as LocaleType,
+} from '../Configurations';
 
 export class Locale {
   public static get Sample(): ICommandRegistry {
@@ -27,7 +30,7 @@ export class Locale {
             return;
           }
 
-          ExtensionConfiguration.locale.write(v);
+          ExtensionConfiguration.locale.write(<LocaleType>v);
           vscode.window.showInformationMessage(
             'Locale Changed! ' + ExtensionConfiguration.locale.read()
           );

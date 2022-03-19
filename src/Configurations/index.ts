@@ -31,7 +31,7 @@ class CodeLenConfiguration implements IConfiguration<boolean> {
   }
 }
 
-type Locale = 'en-US' | 'zh-CN';
+export type Locale = 'en-US' | 'zh-CN';
 
 class LocaleConfigurations implements IConfiguration<Locale> {
   public identifier = 'locale';
@@ -46,7 +46,29 @@ class LocaleConfigurations implements IConfiguration<Locale> {
     );
   }
 
-  public write(input: string): void {
+  public write(input: Locale): void {
+    vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .update(this.identifier, input, true);
+  }
+}
+
+export type SharedBooleanConfigChoices = ['enable', 'disable'];
+
+class WorkspaceFeatureConfiguration implements IConfiguration<boolean> {
+  public identifier = 'workspace';
+
+  public defaultConfig = true;
+
+  public read() {
+    return (
+      vscode.workspace
+        .getConfiguration(Constants.ExtensionIdentifier)
+        .get<boolean>(this.identifier) ?? this.defaultConfig
+    );
+  }
+
+  public write(input: boolean): void {
     vscode.workspace
       .getConfiguration(Constants.ExtensionIdentifier)
       .update(this.identifier, input, true);
@@ -57,4 +79,6 @@ export class ExtensionConfiguration {
   public static locale = new LocaleConfigurations();
 
   public static codeLen = new CodeLenConfiguration();
+
+  public static workspace = new WorkspaceFeatureConfiguration();
 }

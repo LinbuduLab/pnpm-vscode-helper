@@ -2,7 +2,10 @@ import * as vscode from 'vscode';
 import { IParsedPNPMWorkspaceYAMLContent } from '../Commands/Scanner';
 import { ExtensionConfiguration } from '../Configurations';
 import * as yaml from 'js-yaml';
-import { Logger } from '../Utils/Logger';
+import * as globby from 'globby';
+import { Utils } from '../utils';
+import { PackageJson } from 'type-fest';
+import path = require('path');
 
 export class ExtensionHooks {
   public static async pre() {
@@ -30,11 +33,55 @@ export class ExtensionHooks {
       yaml.load(content.toString())
     );
 
-    const packagesDir = parsed.packages;
+    const packagesDirPatterns = parsed.packages;
 
-    for (const dir of packagesDir) {
-      // console.log('nnn', await vscode.workspace.findFiles(dir));
+    const packageDirs: string[] = [];
+
+    // dir -> package name
+    const packageInfoMap: Record<string, string> = {};
+
+    for (const dirPattern of packagesDirPatterns) {
+      const wsPath = Utils.resolveCurrentWorkspaceAbsolutePath();
+
+      const result = globby.sync(`${dirPattern}`, {
+        cwd: wsPath,
+        expandDirectories: false,
+        deep: 1,
+        onlyDirectories: true,
+        absolute: true,
+      });
+
+      packageDirs.push(...result);
     }
+
+    vscode.window.showInformationMessage(
+      `${packageDirs.length} packages found.`
+    );
+
+    for (const packageDir of packageDirs) {
+      const packageJsonDir = path.posix.resolve(packageDir, 'package.json');
+
+      const content = <PackageJson>JSON.parse(
+        (
+          await vscode.workspace.fs.readFile(
+            vscode.Uri.from({
+              path: packageJsonDir,
+              scheme: 'file',
+            })
+          )
+        ).toString()
+      );
+
+      if (content.name) {
+        packageInfoMap[packageDir] = content.name;
+      }
+    }
+
+    ExtensionConfiguration.packages.write(packageInfoMap);
+
+    vscode.window.showInformationMessage(
+      ExtensionConfiguration.packages.read().toString()
+    );
   }
 
   public static async preCheckShamefullyHoistConfig() {

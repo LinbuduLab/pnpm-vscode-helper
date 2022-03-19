@@ -20,6 +20,11 @@ export class Constants {
 }
 
 export class Utils {
+  public static resolveCurrentWorkspaceAbsolutePath() {
+    const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
+    return wsPath;
+  }
+
   public static composeCommand(command: string) {
     return `${Constants.ExtensionIdentifier}.${command}`;
   }
@@ -43,7 +48,7 @@ export class Utils {
 
   public static createFile(filePath: string, fileContent: string) {
     const wsedit = new vscode.WorkspaceEdit();
-    const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
+    const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
     const fileUri = vscode.Uri.file(wsPath + filePath);
 
     wsedit.createFile(fileUri, { ignoreIfExists: true });

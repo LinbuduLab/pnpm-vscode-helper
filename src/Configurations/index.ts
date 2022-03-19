@@ -99,10 +99,12 @@ class ShamefullyHoistConfiguration implements IConfiguration<boolean> {
   }
 }
 
-class WorkspacePackagesConfiguration implements IConfiguration<string[]> {
+class WorkspacePackagesConfiguration
+  implements IConfiguration<Record<string, string>>
+{
   public identifier = 'packages';
 
-  public defaultConfig = [];
+  public defaultConfig = {};
 
   public read() {
     return (
@@ -112,7 +114,7 @@ class WorkspacePackagesConfiguration implements IConfiguration<string[]> {
     );
   }
 
-  public write(input: string[]): void {
+  public write(input: Record<string, string>): void {
     vscode.workspace
       .getConfiguration(Constants.ExtensionIdentifier)
       .update(

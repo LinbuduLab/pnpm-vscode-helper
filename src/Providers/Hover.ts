@@ -57,7 +57,7 @@ export class PackageJsonHoverProvider implements vscode.HoverProvider {
 
     const json = document.getText();
     if (Utils.composeDepsFieldMatcher(word).test(json)) {
-      const destPath = `${Utils.resolveWorkSpaceModulePath(
+      const destPath = `${Utils.Workspace.resolveWorkSpaceModulePath(
         workDir,
         word
       )}/package.json`;

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Locale } from '../Utils/typings';
+import { Locale } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 
 export class LocaleFactory {

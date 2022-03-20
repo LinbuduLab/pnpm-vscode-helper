@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry, Constants, Utils } from '../utils';
+import { Utils } from '../Utils';
+import { ICommandRegistry } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 
 export class Creator {
@@ -7,7 +8,7 @@ export class Creator {
     return {
       command: 'create-npm-rc-config',
       callback: (args: any) => {
-        Utils.createFile('/extension-tmp/.npm1rc', 'hoist=true');
+        Utils.Workspace.createFile('/extension-tmp/.npm1rc', 'hoist=true');
       },
     };
   }
@@ -16,7 +17,7 @@ export class Creator {
     return {
       command: 'create-pnpm-workspace-config',
       callback: (args: any) => {
-        Utils.createFile('/extension-tmp/pnpm-workspace.yaml', 'tmp');
+        Utils.Workspace.createFile('/extension-tmp/pnpm-workspace.yaml', 'tmp');
       },
     };
   }

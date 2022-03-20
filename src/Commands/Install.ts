@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry, Constants, Utils } from '../utils';
+import { Utils } from '../Utils';
+import { ICommandRegistry } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 
 export class Install {
@@ -12,8 +13,12 @@ export class Install {
         const { dependenciesWithVersion, devDependenciesWithVersion } =
           Utils.processDepsRecord(dependencies, devDependencies);
 
-        Utils.createTerminalForDepsInstallation(dependenciesWithVersion);
-        Utils.createTerminalForDevDepsInstallation(devDependenciesWithVersion);
+        Utils.Terminal.createTerminalForDepsInstallation(
+          dependenciesWithVersion
+        );
+        Utils.Terminal.createTerminalForDevDepsInstallation(
+          devDependenciesWithVersion
+        );
       },
     };
   }
@@ -38,7 +43,9 @@ export class Install {
           return;
         }
 
-        Utils.createTerminalForDirectInstallation([selectedTargetPackage]);
+        Utils.Terminal.createTerminalForDirectInstallation([
+          selectedTargetPackage,
+        ]);
       },
     };
   }

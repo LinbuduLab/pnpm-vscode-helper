@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { ExtensionConfiguration } from '../Configurations';
-import { ICommandRegistry } from '../Utils';
-import { Locale as LocaleType } from '../Utils/typings';
+import { ICommandRegistry, Locale as LocaleType } from '../Utils/Typings';
 import { LocaleFactory } from '../Locales';
 
 export class Locale {

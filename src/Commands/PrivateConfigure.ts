@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry, Constants, Utils } from '../utils';
+import { Utils } from '../Utils';
+import { ICommandRegistry } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 
 /**
@@ -39,7 +40,7 @@ export class PrivateExtensionConfigure {
     return {
       command: 'remove-private-extension-config',
       callback: async (args: any) => {
-        const confirm = await Utils.createConfirmDialog(
+        const confirm = await Utils.Workspace.createConfirmDialog(
           'Are you sure you want to remove private config?'
         );
 

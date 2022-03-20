@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry, Constants } from '../utils';
+import { ICommandRegistry } from '../Utils/Typings';
 import {
   ExtensionConfiguration,
   SharedBooleanConfigChoices,

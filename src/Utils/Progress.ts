@@ -1,6 +1,6 @@
 import { ExtensionContext, window, commands, ProgressLocation } from 'vscode';
 
-export class ProgressHelper {
+export class ProgressUtils {
   public static sample(context: ExtensionContext) {
     context.subscriptions.push(
       commands.registerCommand('pnpm-vscode-helper.startTask', () => {

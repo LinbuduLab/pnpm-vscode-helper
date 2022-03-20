@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { Locale } from '../Utils/typings';
-import { Constants } from '../Utils';
+import { Locale } from '../Utils/Typings';
+import { Constants } from '../Constants';
 
 abstract class IConfiguration<T> {
   public abstract identifier: string;

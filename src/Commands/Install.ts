@@ -11,6 +11,9 @@ export class Install {
           Utils.readPackageJson();
         const { dependenciesWithVersion, devDependenciesWithVersion } =
           Utils.processDepsRecord(dependencies, devDependencies);
+
+        Utils.createTerminalForDepsInstallation(dependenciesWithVersion);
+        Utils.createTerminalForDevDepsInstallation(devDependenciesWithVersion);
       },
     };
   }
@@ -35,12 +38,7 @@ export class Install {
           return;
         }
 
-        const { dependencies, devDependencies } = Utils.readPackageJson(
-          pkgs[selectedTargetPackage]
-        );
-
-        const { dependenciesWithVersion, devDependenciesWithVersion } =
-          Utils.processDepsRecord(dependencies, devDependencies);
+        Utils.createTerminalForDirectInstallation([selectedTargetPackage]);
       },
     };
   }

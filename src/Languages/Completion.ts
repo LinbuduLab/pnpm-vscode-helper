@@ -3,7 +3,79 @@ import * as path from 'path';
 import {
   NPMRC_COMPLETION_KEYS,
   NPMRC_COMPLETION_ITEMS,
+  PNPM_WORKSPACE_YAML_KEYS,
+  PNPM_WORKSPACE_YAML_ITEMS,
 } from '../Constants/NPMRC';
+
+export class PNPMWorkspaceYAMLKeyCompletion
+  implements vscode.CompletionItemProvider
+{
+  public static selector: vscode.DocumentSelector = {
+    pattern: '/**/pnpm-workspace.yaml',
+    scheme: 'file',
+  };
+
+  public static trigger: string = '*';
+
+  public provideCompletionItems(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+    token: vscode.CancellationToken,
+    context: vscode.CompletionContext
+  ) {
+    const line = document.lineAt(position);
+
+    const lineText = `${line.text.substring(0, position.character)}`;
+
+    const completions = PNPM_WORKSPACE_YAML_KEYS.filter((key) =>
+      key.startsWith(lineText)
+    ).map(
+      (item) =>
+        new vscode.CompletionItem(
+          { label: item, description: 'pnpm workspace configuration' },
+          vscode.CompletionItemKind.Field
+        )
+    );
+
+    return new vscode.CompletionList(completions);
+  }
+}
+
+export class PNPMWorkspaceYAMLCompletion
+  implements vscode.CompletionItemProvider
+{
+  public static selector: vscode.DocumentSelector = {
+    pattern: '/**/pnpm-workspace.yaml',
+    scheme: 'file',
+  };
+
+  public static trigger: string = ':';
+
+  public provideCompletionItems(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+    token: vscode.CancellationToken,
+    context: vscode.CompletionContext
+  ) {
+    const line = document.lineAt(position);
+
+    const lineText = `${line.text.substring(0, position.character)}`;
+
+    const completionItems = (
+      PNPM_WORKSPACE_YAML_ITEMS[lineText.trimEnd().replace(':', '')] ?? []
+    ).map(
+      (item) =>
+        new vscode.CompletionItem(
+          { label: item, description: 'pnpm workspace configuration' },
+          vscode.CompletionItemKind.Value
+        )
+    );
+
+    console.log('completionItems: ', completionItems);
+
+    return new vscode.CompletionList(completionItems);
+  }
+}
 
 export class PnpmConfigurationKeyCompletion
   implements vscode.CompletionItemProvider
@@ -28,7 +100,11 @@ export class PnpmConfigurationKeyCompletion
     const completions = NPMRC_COMPLETION_KEYS.filter((key) =>
       key.startsWith(lineText)
     ).map(
-      (item) => new vscode.CompletionItem(item, vscode.CompletionItemKind.Field)
+      (item) =>
+        new vscode.CompletionItem(
+          { label: item, description: 'pnpm configuration' },
+          vscode.CompletionItemKind.Field
+        )
     );
 
     return new vscode.CompletionList(completions);
@@ -58,7 +134,11 @@ export class PnpmConfigurationCompletion
     const completionItems = (
       NPMRC_COMPLETION_ITEMS[lineText.replace('=', '')] ?? []
     ).map(
-      (item) => new vscode.CompletionItem(item, vscode.CompletionItemKind.Value)
+      (item) =>
+        new vscode.CompletionItem(
+          { label: item, description: 'pnpm configuration' },
+          vscode.CompletionItemKind.Value
+        )
     );
 
     return new vscode.CompletionList(completionItems);

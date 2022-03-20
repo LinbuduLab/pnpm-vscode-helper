@@ -1,13 +1,21 @@
 import * as vscode from 'vscode';
 import * as ini from 'ini';
 
+const BOOL_COMPLETION_ITEMS = ['true', 'false'];
+
 export class NPMRCHoverTips {
   public static ComposeFieldURL(key: string) {
     return `https://pnpm.io/npmrc#${key}`;
   }
 }
 
-const BOOL_COMPLETION_ITEMS = ['true', 'false'];
+export const PNPM_WORKSPACE_YAML_ITEMS: Record<string, any[]> = {
+  packages: [],
+  'link-workspace-packages': BOOL_COMPLETION_ITEMS,
+  'prefer-workspace-packages': BOOL_COMPLETION_ITEMS,
+  'shared-workspace-lockfile': BOOL_COMPLETION_ITEMS,
+  'save-workspace-protocol': BOOL_COMPLETION_ITEMS,
+};
 
 export const NPMRC_COMPLETION_ITEMS: Record<string, any[]> = {
   hoist: BOOL_COMPLETION_ITEMS,
@@ -24,6 +32,8 @@ export const NPMRC_COMPLETION_ITEMS: Record<string, any[]> = {
 };
 
 export const NPMRC_COMPLETION_KEYS = Object.keys(NPMRC_COMPLETION_ITEMS);
+
+export const PNPM_WORKSPACE_YAML_KEYS = Object.keys(PNPM_WORKSPACE_YAML_ITEMS);
 
 export class NPMRCCompletionItemss {
   public static GetCompletionItem(key: string) {

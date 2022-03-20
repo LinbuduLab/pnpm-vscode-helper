@@ -9,6 +9,8 @@ import { Install } from './Commands/Install';
 import {
   PnpmConfigurationKeyCompletion,
   PnpmConfigurationCompletion,
+  PNPMWorkspaceYAMLKeyCompletion,
+  PNPMWorkspaceYAMLCompletion,
 } from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
 import { Utils } from './utils';
@@ -75,6 +77,16 @@ export class ExtensionRegistry {
         PnpmConfigurationKeyCompletion.selector,
         new PnpmConfigurationKeyCompletion(),
         PnpmConfigurationKeyCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PNPMWorkspaceYAMLKeyCompletion.selector,
+        new PNPMWorkspaceYAMLKeyCompletion(),
+        PNPMWorkspaceYAMLKeyCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PNPMWorkspaceYAMLCompletion.selector,
+        new PNPMWorkspaceYAMLCompletion(),
+        PNPMWorkspaceYAMLCompletion.trigger
       )
     );
   }

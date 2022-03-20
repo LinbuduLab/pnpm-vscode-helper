@@ -101,6 +101,19 @@
         "pnpm-vscode-helper.workspacePackages": {
           "type": "object",
           "default": {}
+        },
+        "pnpm-vscode-helper.privateExtConfig": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "default": ""
+            },
+            "email": {
+              "type": "string",
+              "default": ""
+            }
+          }
         }
       }
     }

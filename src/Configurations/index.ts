@@ -12,6 +12,33 @@ abstract class IConfiguration<T> {
   public abstract write(input: T): void;
 }
 
+interface IPrivateConfig {
+  username?: string;
+  email?: string;
+}
+
+class PrivateExtensionConfigConfiguration
+  implements IConfiguration<IPrivateConfig>
+{
+  public identifier = 'privateExtConfig';
+
+  public defaultConfig = {};
+
+  public read(): IPrivateConfig {
+    return (
+      vscode.workspace
+        .getConfiguration(Constants.ExtensionIdentifier)
+        .get<IPrivateConfig>(this.identifier) ?? this.defaultConfig
+    );
+  }
+
+  public write(input: Required<IPrivateConfig>): void {
+    vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .update(this.identifier, input, true);
+  }
+}
+
 class CodeLenConfiguration implements IConfiguration<boolean> {
   public identifier = 'enableCodeLens';
 
@@ -126,4 +153,6 @@ export class ExtensionConfiguration {
   public static shamefullyHoist = new ShamefullyHoistConfiguration();
 
   public static packages = new WorkspacePackagesConfiguration();
+
+  public static privateExtConfig = new PrivateExtensionConfigConfiguration();
 }

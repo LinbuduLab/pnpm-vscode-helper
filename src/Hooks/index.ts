@@ -119,8 +119,10 @@ export class ExtensionHooks {
   }
 
   public static async experimentalWorks(context: vscode.ExtensionContext) {
-    vscode.window.onDidChangeTerminalState((t) => {
-      console.log(t.name);
+    ExtensionConfiguration.privateExtConfig.write({
+      username: 'xxxx',
+      email: 'ffff',
     });
+    console.log('111', ExtensionConfiguration.privateExtConfig.read());
   }
 }

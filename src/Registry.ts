@@ -9,7 +9,10 @@ import { Install } from './Commands/Install';
 import { PnpmConfigurationCompletion } from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
 import { Utils } from './utils';
-import { PackageJsonHoverProvider } from './Providers/Hover';
+import {
+  PackageJsonHoverProvider,
+  PNPMWorkspaceYAMLHoverProvider,
+} from './Providers/Hover';
 import { PackageJsonDefinitionProvider } from './Providers/Definition';
 
 export class ExtensionRegistry {
@@ -77,6 +80,10 @@ export class ExtensionRegistry {
       vscode.languages.registerHoverProvider(
         PackageJsonHoverProvider.selector,
         new PackageJsonHoverProvider()
+      ),
+      vscode.languages.registerHoverProvider(
+        PNPMWorkspaceYAMLHoverProvider.selector,
+        new PNPMWorkspaceYAMLHoverProvider()
       )
     );
   }

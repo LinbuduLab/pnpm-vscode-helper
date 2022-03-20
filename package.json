@@ -34,6 +34,14 @@
         "title": "Hello World"
       },
       {
+        "command": "pnpm-vscode-helper.create-private-extension-config",
+        "title": "Create private extension configuration"
+      },
+      {
+        "command": "pnpm-vscode-helper.remove-private-extension-config",
+        "title": "Remove private extension configuration"
+      },
+      {
         "command": "pnpm-vscode-helper.install-workspace-root-deps",
         "title": "Install workspace root dependencies only"
       },

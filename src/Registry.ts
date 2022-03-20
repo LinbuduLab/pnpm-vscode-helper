@@ -6,6 +6,7 @@ import { ScanWorkspace } from './Commands/Scanner';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
+import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
 import {
   PnpmConfigurationKeyCompletion,
   PnpmConfigurationCompletion,
@@ -53,6 +54,25 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(Workspace.ToggleWorkspaceFeatureStatus.command),
         Workspace.ToggleWorkspaceFeatureStatus.callback
+      )
+    );
+  }
+
+  public static registerPrivateExtensionConfigCommand(
+    context: vscode.ExtensionContext
+  ) {
+    context.subscriptions.push(
+      vscode.commands.registerCommand(
+        Utils.composeCommand(
+          PrivateExtensionConfigure.CreatePrivateConfig.command
+        ),
+        PrivateExtensionConfigure.CreatePrivateConfig.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(
+          PrivateExtensionConfigure.RemovePrivateConfig.command
+        ),
+        PrivateExtensionConfigure.RemovePrivateConfig.callback
       )
     );
   }

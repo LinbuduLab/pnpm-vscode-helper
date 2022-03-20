@@ -139,6 +139,16 @@ export class Utils {
       `pnpm install ${devDeps.join(' ')} --save-dev ${locationArgs}`
     );
   }
+
+  public static async createConfirmDialog(message: string): Promise<boolean> {
+    const confirm = await vscode.window.showInformationMessage(
+      message,
+      'Confirm',
+      'Cancel'
+    );
+
+    return confirm === 'Confirm';
+  }
 }
 
 export class ProjectWorkspaceScanner {}

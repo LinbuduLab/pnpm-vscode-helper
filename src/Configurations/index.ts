@@ -32,7 +32,7 @@ class PrivateExtensionConfigConfiguration
     );
   }
 
-  public write(input: Required<IPrivateConfig>): void {
+  public write(input: IPrivateConfig): void {
     vscode.workspace
       .getConfiguration(Constants.ExtensionIdentifier)
       .update(this.identifier, input, true);

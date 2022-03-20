@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as yaml from 'js-yaml';
 import * as globby from 'globby';
 import * as path from 'path';
+import * as ini from 'ini';
 
 import { PackageJson } from 'type-fest';
 
@@ -99,6 +100,7 @@ export class ExtensionHooks {
       '**/node_modules/**',
       1
     );
+
     if (!npmRC.length) {
       // todo: remove
       vscode.window.showWarningMessage('file .npmrc is not found');
@@ -107,10 +109,9 @@ export class ExtensionHooks {
 
     const content = (await vscode.workspace.fs.readFile(npmRC[0])).toString();
 
-    // todo: .rc parser
-    const [, _ = ''] = content.split('shamefully-hoist=');
+    const parsed = ini.parse(content);
 
-    const shamefullyHoistEnabled = _.startsWith('true');
+    const shamefullyHoistEnabled = parsed['shamefully-hoist'] ?? false;
 
     ExtensionConfiguration.shamefullyHoist.write(shamefullyHoistEnabled);
 
@@ -118,11 +119,5 @@ export class ExtensionHooks {
       vscode.window.showInformationMessage('shamefully-hoist enabled.');
   }
 
-  public static async experimentalWorks(context: vscode.ExtensionContext) {
-    ExtensionConfiguration.privateExtConfig.write({
-      username: 'xxxx',
-      email: 'ffff',
-    });
-    console.log('111', ExtensionConfiguration.privateExtConfig.read());
-  }
+  public static async experimentalWorks(context: vscode.ExtensionContext) {}
 }

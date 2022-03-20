@@ -62,12 +62,20 @@ export class ExtensionRegistry {
   }
 
   public static registerCompletionProviders(context: vscode.ExtensionContext) {
+    // context.subscriptions.push(
+    //   // Pnpm Configuration in .npmrc file
+    //   PnpmConfigurationCompletion.sample1(context),
+    //   PnpmConfigurationCompletion.sample2(context)
+
+    //   // Pnpm Worksapce Configuration in pnpm-workspace.yaml file
+    //   // Pnpm File Configuration in .pnpmfile.cjs file
+    // );
     context.subscriptions.push(
-      // Pnpm Configuration in .npmrc file
-      PnpmConfigurationCompletion.sample1(context),
-      PnpmConfigurationCompletion.sample2(context)
-      // Pnpm Worksapce Configuration in pnpm-workspace.yaml file
-      // Pnpm File Configuration in .pnpmfile.cjs file
+      vscode.languages.registerCompletionItemProvider(
+        PnpmConfigurationCompletion.selector,
+        new PnpmConfigurationCompletion(),
+        PnpmConfigurationCompletion.trigger
+      )
     );
   }
 

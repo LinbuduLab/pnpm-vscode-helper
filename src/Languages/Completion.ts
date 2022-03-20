@@ -1,6 +1,36 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
+import { NPMRC_COMPLETION_ITEMS } from '../Constants/NPMRC';
 
-export class PnpmConfigurationCompletion {
+export class PnpmConfigurationCompletion
+  implements vscode.CompletionItemProvider
+{
+  public static selector: vscode.DocumentSelector = {
+    pattern: '/**/.npmrc',
+    scheme: 'file',
+  };
+
+  public static trigger: string = '=';
+
+  public provideCompletionItems(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+    token: vscode.CancellationToken,
+    context: vscode.CompletionContext
+  ) {
+    const line = document.lineAt(position);
+
+    const lineText = `${line.text.substring(0, position.character)}`;
+
+    const completionItems = (
+      NPMRC_COMPLETION_ITEMS[lineText.replace('=', '')] ?? []
+    ).map(
+      (item) => new vscode.CompletionItem(item, vscode.CompletionItemKind.Value)
+    );
+
+    return new vscode.CompletionList(completionItems);
+  }
+
   public static sample1(context: vscode.ExtensionContext) {
     const provider1 = vscode.languages.registerCompletionItemProvider(
       'plaintext',

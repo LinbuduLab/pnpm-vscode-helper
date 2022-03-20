@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/glob': ^7.2.0
+  '@types/ini': ^1.3.31
   '@types/js-yaml': ^4.0.5
   '@types/lodash': ^4.14.180
   '@types/mocha': ^9.1.0
@@ -14,6 +15,7 @@ specifiers:
   eslint: ^8.9.0
   glob: ^7.2.0
   globby: ^11.0.3
+  ini: ^2.0.0
   js-yaml: ^4.1.0
   lodash: ^4.17.21
   mocha: ^9.2.1
@@ -24,12 +26,14 @@ specifiers:
 dependencies:
   consola: 2.15.3
   globby: 11.1.0
+  ini: 2.0.0
   js-yaml: 4.1.0
   lodash: 4.17.21
   rc-parser: 1.0.2
 
 devDependencies:
   '@types/glob': 7.2.0
+  '@types/ini': 1.3.31
   '@types/js-yaml': 4.0.5
   '@types/lodash': 4.14.180
   '@types/mocha': 9.1.0
@@ -127,6 +131,10 @@ packages:
     dependencies:
       '@types/minimatch': 3.0.5
       '@types/node': 14.18.12
+    dev: true
+
+  /@types/ini/1.3.31:
+    resolution: {integrity: sha512-8ecxxaG4AlVEM1k9+BsziMw8UsX0qy3jYI1ad/71RrDZ+rdL6aZB0wLfAuflQiDhkD5o4yJ0uPK3OSUic3fG0w==}
     dev: true
 
   /@types/js-yaml/4.0.5:
@@ -944,6 +952,11 @@ packages:
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: true
+
+  /ini/2.0.0:
+    resolution: {integrity: sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==}
+    engines: {node: '>=10'}
+    dev: false
 
   /is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}

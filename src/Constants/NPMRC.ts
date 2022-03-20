@@ -23,6 +23,8 @@ export const NPMRC_COMPLETION_ITEMS: Record<string, any[]> = {
   'strict-peer-dependencies': BOOL_COMPLETION_ITEMS,
 };
 
+export const NPMRC_COMPLETION_KEYS = Object.keys(NPMRC_COMPLETION_ITEMS);
+
 export class NPMRCCompletionItemss {
   public static GetCompletionItem(key: string) {
     return NPMRC_COMPLETION_ITEMS[key] ?? null;

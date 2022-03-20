@@ -6,7 +6,10 @@ import { ScanWorkspace } from './Commands/Scanner';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
-import { PnpmConfigurationCompletion } from './Languages/Completion';
+import {
+  PnpmConfigurationKeyCompletion,
+  PnpmConfigurationCompletion,
+} from './Languages/Completion';
 import { CodelensProvider } from './Providers/CodeLen';
 import { Utils } from './utils';
 import {
@@ -62,19 +65,16 @@ export class ExtensionRegistry {
   }
 
   public static registerCompletionProviders(context: vscode.ExtensionContext) {
-    // context.subscriptions.push(
-    //   // Pnpm Configuration in .npmrc file
-    //   PnpmConfigurationCompletion.sample1(context),
-    //   PnpmConfigurationCompletion.sample2(context)
-
-    //   // Pnpm Worksapce Configuration in pnpm-workspace.yaml file
-    //   // Pnpm File Configuration in .pnpmfile.cjs file
-    // );
     context.subscriptions.push(
       vscode.languages.registerCompletionItemProvider(
         PnpmConfigurationCompletion.selector,
         new PnpmConfigurationCompletion(),
         PnpmConfigurationCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PnpmConfigurationKeyCompletion.selector,
+        new PnpmConfigurationKeyCompletion(),
+        PnpmConfigurationKeyCompletion.trigger
       )
     );
   }

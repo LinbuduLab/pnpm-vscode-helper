@@ -49,7 +49,7 @@ export class PNPMWorkspaceYAMLCompletion
     scheme: 'file',
   };
 
-  public static trigger: string = ':';
+  public static trigger: string = '=';
 
   public provideCompletionItems(
     document: vscode.TextDocument,
@@ -62,7 +62,9 @@ export class PNPMWorkspaceYAMLCompletion
     const lineText = `${line.text.substring(0, position.character)}`;
 
     const completionItems = (
-      PNPM_WORKSPACE_YAML_ITEMS[lineText.trimEnd().replace(':', '')] ?? []
+      PNPM_WORKSPACE_YAML_ITEMS[
+        lineText.replace(PNPMWorkspaceYAMLCompletion.trigger, '')
+      ] ?? []
     ).map(
       (item) =>
         new vscode.CompletionItem(
@@ -71,9 +73,12 @@ export class PNPMWorkspaceYAMLCompletion
         )
     );
 
-    console.log('completionItems: ', completionItems);
-
-    return new vscode.CompletionList(completionItems);
+    return new vscode.CompletionList([
+      new vscode.CompletionItem(
+        { label: 'item', description: 'pnpm workspace configuration' },
+        vscode.CompletionItemKind.Value
+      ),
+    ]);
   }
 }
 

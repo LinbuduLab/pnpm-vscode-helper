@@ -3,6 +3,17 @@ import * as ini from 'ini';
 
 const BOOL_COMPLETION_ITEMS = ['true', 'false'];
 
+export class NPMRCInitialContent {
+  public static get content(): string {
+    const raw = {
+      hoist: true,
+      shamefullyHoist: false,
+    };
+
+    return ini.stringify(raw);
+  }
+}
+
 export class NPMRCHoverTips {
   public static ComposeFieldURL(key: string) {
     return `https://pnpm.io/npmrc#${key}`;

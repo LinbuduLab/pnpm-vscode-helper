@@ -10,6 +10,7 @@ import { PackageJsonHoverTips } from '../Constants/PackageJson';
 export class PNPMWorkspaceYAMLHoverProvider implements vscode.HoverProvider {
   public static selector: vscode.DocumentSelector = {
     pattern: '/**/pnpm-workspace.yaml',
+    scheme: 'file',
   };
 
   public provideHover(

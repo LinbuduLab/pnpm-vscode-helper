@@ -23,29 +23,32 @@ export class Install {
     };
   }
 
-  // public static get CheckUpdate(): ICommandRegistry {
-  //   return {
-  //     command: 'install-only-selected-packages-deps',
-  //     callback: async (args: any) => {},
-  //   };
-  // }
+  public static get CheckDepsUpdateForSelectedPackages(): ICommandRegistry {
+    return {
+      command: 'check-deps-update-for-selected-packages',
+      callback: async (args: any) => {},
+    };
+  }
 
   public static get InstallSelectPackagesDepsOnly(): ICommandRegistry {
     return {
       command: 'install-selected-packages-deps',
       callback: async (args: any) => {
         const pkgs = ExtensionConfiguration.packages.read();
-        const selectedTargetPackage = await vscode.window.showQuickPick(
-          Object.keys(pkgs)
+        const selectedTargetPackages = await vscode.window.showQuickPick(
+          Object.keys(pkgs),
+          {
+            canPickMany: true,
+          }
         );
 
-        if (!selectedTargetPackage) {
+        if (!Boolean(selectedTargetPackages?.length)) {
           return;
         }
 
-        Utils.Terminal.createTerminalForDirectInstallation([
-          selectedTargetPackage,
-        ]);
+        Utils.Terminal.createTerminalForDirectInstallation(
+          selectedTargetPackages
+        );
       },
     };
   }

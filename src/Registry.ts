@@ -89,14 +89,14 @@ export class ExtensionRegistry {
   public static registerCompletionProviders(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       vscode.languages.registerCompletionItemProvider(
-        PnpmConfigurationCompletion.selector,
-        new PnpmConfigurationCompletion(),
-        PnpmConfigurationCompletion.trigger
-      ),
-      vscode.languages.registerCompletionItemProvider(
         PnpmConfigurationKeyCompletion.selector,
         new PnpmConfigurationKeyCompletion(),
         PnpmConfigurationKeyCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PnpmConfigurationCompletion.selector,
+        new PnpmConfigurationCompletion(),
+        PnpmConfigurationCompletion.trigger
       ),
       vscode.languages.registerCompletionItemProvider(
         PNPMWorkspaceYAMLKeyCompletion.selector,
@@ -168,6 +168,12 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(Install.InstallSelectPackagesDepsOnly.command),
         Install.InstallSelectPackagesDepsOnly.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(
+          Install.CheckDepsUpdateForSelectedPackages.command
+        ),
+        Install.CheckDepsUpdateForSelectedPackages.callback
       )
     );
   }

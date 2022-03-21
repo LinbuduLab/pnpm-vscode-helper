@@ -9,7 +9,7 @@ export class TerminalUtils {
     );
 
     const locationArgs = packagesFilter.length
-      ? `--filter='${packagesFilter.join(',')}'`
+      ? `${packagesFilter.map((filter) => `--filter="${filter}"`).join(' ')}`
       : '--workspace-root';
 
     depsTerminal.show(false);

@@ -1,4 +1,19 @@
 import * as vscode from 'vscode';
+import * as yaml from 'js-yaml';
+
+export class WorkspaceYAMLInitialContent {
+  public static get content(): string {
+    const raw = {
+      packages: ['packages/**', '!**/test/**'],
+      'link-workspace-packages': false,
+      'prefer-workspace-packages': false,
+      'shared-workspace-lockfile': true,
+      'save-workspace-protocol': true,
+    };
+
+    return yaml.dump(raw);
+  }
+}
 
 export class WorkspaceYAMLHoverTips {
   public static PackagesFieldTip() {

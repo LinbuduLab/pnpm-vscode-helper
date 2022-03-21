@@ -50,6 +50,10 @@
         "title": "Install selected package dependencies only"
       },
       {
+        "command": "check-deps-update-for-selected-packages",
+        "title": "Check deps update for selected packages"
+      },
+      {
         "command": "pnpm-vscode-helper.toggleLocale",
         "title": "Toggle Locale(切换语言)"
       },

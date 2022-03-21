@@ -38,7 +38,10 @@ export class Install {
         const selectedTargetPackages = await vscode.window.showQuickPick(
           Object.keys(pkgs),
           {
+            title: 'Package Selector',
             canPickMany: true,
+            placeHolder:
+              'Select packages which you want to install dependencies',
           }
         );
 

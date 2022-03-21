@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry } from '../Utils/Typings';
+import { Utils } from '../Utils';
+import { ICommandRegistry, PackageFilterType } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 
 /**
@@ -8,10 +9,15 @@ import { ExtensionConfiguration } from '../Configurations';
  * - select a behavior, choose the package
  */
 export class Package {
-  public static operations: string[] = [
+  // todo: use selected package scripts
+  public static scripts: string[] = ['dev', 'start', 'build'];
+
+  public static operations: PackageFilterType[] = [
     'self',
     'withDependencies',
     'withDependents',
+    'dependenciesOnly',
+    'dependentsOnly',
   ];
 
   public static get SelectPackage(): ICommandRegistry {
@@ -25,20 +31,26 @@ export class Package {
           return;
         }
 
-        vscode.window.showInformationMessage(
-          `package >>> ${selectedTargetPackage} <<< selected.`
+        const selectedScript = await vscode.window.showQuickPick(
+          Package.scripts
         );
 
-        const selectedOperations = await vscode.window.showQuickPick(
-          Package.operations
-        );
-
-        if (!selectedOperations) {
+        if (!selectedScript) {
           return;
         }
 
-        vscode.window.showInformationMessage(
-          `operation >>> ${selectedOperations} <<< selected.`
+        const selectedOperation = <PackageFilterType>(
+          await vscode.window.showQuickPick(Package.operations)
+        );
+
+        if (!selectedOperation) {
+          return;
+        }
+
+        Utils.Terminal.createTerminalForScriptExecution(
+          selectedTargetPackage,
+          selectedScript,
+          selectedOperation
         );
       },
     };

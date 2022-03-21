@@ -6,6 +6,7 @@ import { TerminalUtils } from './Terminal';
 import { Logger } from './Logger';
 import { ProgressUtils } from './Progress';
 import { Matcher } from './Matcher';
+import { PackageUtils } from './Package';
 
 import { Constants } from '../Constants';
 
@@ -19,6 +20,8 @@ export class Utils {
   public static ProgressUtils = ProgressUtils;
 
   public static Matcher = Matcher;
+
+  public static Package = PackageUtils;
 
   public static composeCommand(command: string) {
     return `${Constants.ExtensionIdentifier}.${command}`;

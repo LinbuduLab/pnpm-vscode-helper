@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import { PackageUtils } from './Package';
+import { PackageFilterType } from './Typings';
 
 export class TerminalUtils {
   public static createTerminalForDirectInstallation(
@@ -25,7 +27,7 @@ export class TerminalUtils {
     );
 
     const locationArgs = packagesFilter.length
-      ? `--filter='${packagesFilter.join(',')}'`
+      ? `${packagesFilter.map((filter) => `--filter="${filter}"`).join(' ')}`
       : '--workspace-root';
 
     depsTerminal.show(false);
@@ -41,12 +43,30 @@ export class TerminalUtils {
     );
 
     const locationArgs = packagesFilter.length
-      ? `--filter='${packagesFilter.join(',')}'`
+      ? `${packagesFilter.map((filter) => `--filter="${filter}"`).join(' ')}`
       : '--workspace-root';
 
     devDepsTerminal.show(false);
     devDepsTerminal.sendText(
       `pnpm install ${devDeps.join(' ')} --save-dev ${locationArgs}`
     );
+  }
+
+  public static createTerminalForScriptExecution(
+    targetPackage: string,
+    script: string,
+    executeType: PackageFilterType = 'self'
+  ) {
+    const executionTerminal = vscode.window.createTerminal(
+      `Script Execution Terminal`
+    );
+
+    const locationArgs = PackageUtils.targetFilterTypeFactory(
+      targetPackage,
+      executeType
+    );
+
+    executionTerminal.show(false);
+    executionTerminal.sendText(`pnpm run ${script} ${locationArgs}`);
   }
 }

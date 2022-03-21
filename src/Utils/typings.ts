@@ -14,3 +14,10 @@ export abstract class IConfiguration<T> {
 
   public abstract write(input: T): void;
 }
+
+export type PackageFilterType =
+  | 'self'
+  | 'withDependencies'
+  | 'withDependents'
+  | 'dependenciesOnly'
+  | 'dependentsOnly';

@@ -5,6 +5,7 @@ import { WorkspaceUtils } from './Workspace';
 import { TerminalUtils } from './Terminal';
 import { Logger } from './Logger';
 import { ProgressUtils } from './Progress';
+import { Matcher } from './Matcher';
 
 import { Constants } from '../Constants';
 
@@ -17,18 +18,10 @@ export class Utils {
 
   public static ProgressUtils = ProgressUtils;
 
+  public static Matcher = Matcher;
+
   public static composeCommand(command: string) {
     return `${Constants.ExtensionIdentifier}.${command}`;
-  }
-
-  public static composeDepsFieldMatcher(word: string) {
-    return new RegExp(
-      `"(dependencies|devDependencies)":\\s*?\\{[\\s\\S]*?${word.replace(
-        /\//g,
-        '\\/'
-      )}[\\s\\S]*?\\}`,
-      'gm'
-    );
   }
 
   public static readPackageJson(packageDir?: string): PackageJson {

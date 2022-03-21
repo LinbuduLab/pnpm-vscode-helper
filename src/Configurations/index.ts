@@ -1,16 +1,6 @@
 import * as vscode from 'vscode';
-import { Locale } from '../Utils/Typings';
+import { IConfiguration, Locale } from '../Utils/Typings';
 import { Constants } from '../Constants';
-
-abstract class IConfiguration<T> {
-  public abstract identifier: string;
-
-  public abstract defaultConfig: T;
-
-  public abstract read(): T;
-
-  public abstract write(input: T): void;
-}
 
 interface IPrivateConfig {
   username?: string;

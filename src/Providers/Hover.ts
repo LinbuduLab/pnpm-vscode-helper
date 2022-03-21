@@ -5,6 +5,7 @@ import { Utils } from '../Utils';
 import { WorkspaceYAMLHoverTips } from '../Constants/WorkspaceYAML';
 import { PackageJson } from 'type-fest';
 import * as yaml from 'js-yaml';
+import { PackageJsonHoverTips } from '../Constants/PackageJson';
 
 export class PNPMWorkspaceYAMLHoverProvider implements vscode.HoverProvider {
   public static selector: vscode.DocumentSelector = {
@@ -54,21 +55,20 @@ export class PackageJsonHoverProvider implements vscode.HoverProvider {
     const fileName = document.fileName;
     const workDir = path.posix.dirname(fileName);
     const word = document.getText(document.getWordRangeAtPosition(position));
-
     const json = document.getText();
-    if (Utils.composeDepsFieldMatcher(word).test(json)) {
-      const destPath = `${Utils.Workspace.resolveWorkSpaceModulePath(
-        workDir,
-        word
-      )}/package.json`;
 
-      if (fs.existsSync(destPath)) {
-        const content = <PackageJson>require(destPath);
-        return new vscode.Hover(
-          `* **名称**：${content.name}\n* **版本**：${content.version}\n* **许可协议**：${content.license}`
-        );
-      }
-      return null;
-    }
+    const purifiedWord = word.replaceAll('"', '');
+
+    const isPNPMSpecifiedConfigField =
+      (Utils.Matcher.composePNPMConfigFieldMatcher(word).test(json) &&
+        PackageJsonHoverTips.supportedConfigFields.includes(purifiedWord)) ||
+      PackageJsonHoverTips.supportedConfigRootFields.includes(purifiedWord);
+
+    const hoverTips = PackageJsonHoverTips.ConfigFieldHoverTip();
+    const matched = hoverTips[<keyof typeof hoverTips>purifiedWord];
+
+    return isPNPMSpecifiedConfigField && matched
+      ? new vscode.Hover(matched)
+      : null;
   }
 }

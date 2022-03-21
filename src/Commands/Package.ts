@@ -24,9 +24,21 @@ export class Package {
     return {
       command: 'select-workspace-package',
       callback: async (args: any) => {
+        const workspacePackages =
+          (await Utils.Workspace.collectWorkspacePackages()) ?? {};
+
+        const workspacePackagesChoices = Object.keys(workspacePackages);
+
+        if (!workspacePackagesChoices.length) {
+          vscode.window.showInformationMessage(
+            'No packages found in current workspace'
+          );
+        }
+
         const selectedTargetPackage = await vscode.window.showQuickPick(
-          Object.keys(ExtensionConfiguration.packages.read())
+          workspacePackagesChoices
         );
+
         if (!selectedTargetPackage) {
           return;
         }

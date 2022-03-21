@@ -6,6 +6,7 @@ export class ExtensionHooks {
   public static async execute(context: vscode.ExtensionContext) {
     await ExtensionExperimentalHook.experimentalWorks(context);
     await ExtensionPreHook.preCheckShamefullyHoistConfig();
-    await ExtensionPreHook.preCollectWorkspacePackages();
+    // we change to do this as-needed
+    // await ExtensionPreHook.preCollectWorkspacePackages();
   }
 }

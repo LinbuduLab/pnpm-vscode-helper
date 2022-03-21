@@ -34,9 +34,18 @@ export class Install {
     return {
       command: 'install-selected-packages-deps',
       callback: async (args: any) => {
-        const pkgs = ExtensionConfiguration.packages.read();
+        const workspacePackages =
+          (await Utils.Workspace.collectWorkspacePackages()) ?? {};
+
+        const workspacePackagesChoices = Object.keys(workspacePackages);
+
+        if (!workspacePackagesChoices.length) {
+          vscode.window.showInformationMessage(
+            'No packages found in current workspace'
+          );
+        }
         const selectedTargetPackages = await vscode.window.showQuickPick(
-          Object.keys(pkgs),
+          workspacePackagesChoices,
           {
             title: 'Package Selector',
             canPickMany: true,

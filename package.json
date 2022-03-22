@@ -15,85 +15,66 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "terminal": {
-      "profiles": [
-        {
-          "id": "terminalTest.terminal-profile",
-          "icon": "terminal",
-          "title": "Terminal API Profile"
-        }
-      ]
-    },
     "commands": [
       {
-        "command": "terminalTest.createAndSend",
-        "title": "Terminal API: Create Terminal and Immediately Send"
-      },
-      {
-        "command": "pnpm-vscode-helper.helloWorld",
-        "title": "Hello World"
-      },
-      {
+        "title": "Create private extension configuration used by pnpm init command.",
         "command": "pnpm-vscode-helper.create-private-extension-config",
-        "title": "Create private extension configuration"
+        "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Remove private extension configuration used by pnpm init command.",
         "command": "pnpm-vscode-helper.remove-private-extension-config",
-        "title": "Remove private extension configuration"
+        "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Install workspace root dependencies only.",
         "command": "pnpm-vscode-helper.install-workspace-root-deps",
-        "title": "Install workspace root dependencies only"
+        "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Install selected package dependencies only.",
         "command": "pnpm-vscode-helper.install-selected-packages-deps",
-        "title": "Install selected package dependencies only"
+        "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Check deps update for selected packages",
         "command": "check-deps-update-for-selected-packages",
-        "title": "Check deps update for selected packages"
+        "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Toggle Locale(切换语言，暂不可用)",
         "command": "pnpm-vscode-helper.toggleLocale",
-        "title": "Toggle Locale(切换语言)"
-      },
-      {
-        "command": "pnpm-vscode-helper.startTask",
-        "title": "Show Progress"
+        "category": "PNPM VS Code Helper"
       },
       {
         "title": "Enable CodeLens",
         "command": "pnpm-vscode-helper.enableCodeLens",
-        "category": "PNPM CodeLens Sample"
+        "category": "PNPM VS Code Helper"
       },
       {
         "title": "Disable Codelens",
         "command": "pnpm-vscode-helper.disableCodeLens",
-        "category": "PNPM CodeLens Sample"
-      },
-      {
-        "title": "Toggle Workspace Featrue Status",
-        "command": "pnpm-vscode-helper.toggleWorkspaceFeature"
+        "category": "PNPM VS Code Helper"
       },
       {
         "title": "Sync Project Workspace Info",
         "command": "pnpm-vscode-helper.scan-workspace",
-        "category": "PNPM W Sample"
+        "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Create .npmrc config with pnpm configuration",
+        "title": "Create .npmrc config with initial default configuration",
         "command": "pnpm-vscode-helper.create-npm-rc-config",
-        "category": "PNPM W Sample"
+        "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Create pnpm-workspace.yaml config with pnpm configuration",
+        "title": "Create pnpm-workspace.yaml config with init default configuration",
         "command": "pnpm-vscode-helper.create-pnpm-workspace-config",
-        "category": "PNPM W Sample"
+        "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Select workspace packages",
+        "title": "Select workspace packages and execute operations with filters",
         "command": "pnpm-vscode-helper.select-workspace-package",
-        "category": "PNPM W Sample"
+        "category": "PNPM VS Code Helper"
       }
     ],
     "configuration": {

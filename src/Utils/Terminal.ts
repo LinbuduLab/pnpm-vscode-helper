@@ -67,6 +67,8 @@ export class TerminalUtils {
     );
 
     executionTerminal.show(false);
-    executionTerminal.sendText(`pnpm run ${script} ${locationArgs}`);
+    executionTerminal.sendText(
+      `pnpm ${script === 'install' ? '' : 'run'} ${script} ${locationArgs}`
+    );
   }
 }

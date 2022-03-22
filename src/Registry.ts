@@ -10,7 +10,6 @@ import { Install } from './Commands/Install';
 import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
 
 import { CodelensProvider } from './Providers/CodeLen';
-import { PackageJsonDefinitionProvider } from './Providers/Definition';
 import { PackageJsonHoverProvider } from './Providers/PackageJson.hover';
 import { NPMRCHoverProvider } from './Providers/NPMRC.hover';
 import {
@@ -91,57 +90,6 @@ export class ExtensionRegistry {
     );
   }
 
-  public static registerCompletionProviders(context: vscode.ExtensionContext) {
-    context.subscriptions.push(
-      vscode.languages.registerCompletionItemProvider(
-        PnpmConfigurationKeyCompletion.selector,
-        new PnpmConfigurationKeyCompletion(),
-        PnpmConfigurationKeyCompletion.trigger
-      ),
-      vscode.languages.registerCompletionItemProvider(
-        PnpmConfigurationCompletion.selector,
-        new PnpmConfigurationCompletion(),
-        PnpmConfigurationCompletion.trigger
-      ),
-      vscode.languages.registerCompletionItemProvider(
-        PNPMWorkspaceYAMLKeyCompletion.selector,
-        new PNPMWorkspaceYAMLKeyCompletion(),
-        PNPMWorkspaceYAMLKeyCompletion.trigger
-      ),
-      vscode.languages.registerCompletionItemProvider(
-        PNPMWorkspaceYAMLCompletion.selector,
-        new PNPMWorkspaceYAMLCompletion(),
-        PNPMWorkspaceYAMLCompletion.trigger
-      )
-    );
-  }
-
-  public static registerCodeLensProvider(context: vscode.ExtensionContext) {
-    vscode.languages.registerCodeLensProvider('*', new CodelensProvider());
-  }
-
-  public static registerHoverProvider(context: vscode.ExtensionContext) {
-    context.subscriptions.push(
-      vscode.languages.registerHoverProvider(
-        PackageJsonHoverProvider.selector,
-        new PackageJsonHoverProvider()
-      ),
-      vscode.languages.registerHoverProvider(
-        PNPMWorkspaceYAMLHoverProvider.selector,
-        new PNPMWorkspaceYAMLHoverProvider()
-      )
-    );
-  }
-
-  public static registerDefinitionProvider(context: vscode.ExtensionContext) {
-    context.subscriptions.push(
-      vscode.languages.registerDefinitionProvider(
-        PackageJsonDefinitionProvider.selector,
-        new PackageJsonDefinitionProvider()
-      )
-    );
-  }
-
   public static registerCreatorCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       vscode.commands.registerCommand(
@@ -181,5 +129,55 @@ export class ExtensionRegistry {
         Install.CheckDepsUpdateForSelectedPackages.callback
       )
     );
+  }
+
+  public static registerHoverProvider(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.languages.registerHoverProvider(
+        PackageJsonHoverProvider.selector,
+        new PackageJsonHoverProvider()
+      ),
+      vscode.languages.registerHoverProvider(
+        PNPMWorkspaceYAMLHoverProvider.selector,
+        new PNPMWorkspaceYAMLHoverProvider()
+      ),
+      vscode.languages.registerHoverProvider(
+        NPMRCHoverProvider.selector,
+        new NPMRCHoverProvider()
+      )
+    );
+  }
+
+  public static registerCompletionProviders(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      vscode.languages.registerCompletionItemProvider(
+        PnpmConfigurationKeyCompletion.selector,
+        new PnpmConfigurationKeyCompletion(),
+        PnpmConfigurationKeyCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PnpmConfigurationCompletion.selector,
+        new PnpmConfigurationCompletion(),
+        PnpmConfigurationCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PNPMWorkspaceYAMLKeyCompletion.selector,
+        new PNPMWorkspaceYAMLKeyCompletion(),
+        PNPMWorkspaceYAMLKeyCompletion.trigger
+      ),
+      vscode.languages.registerCompletionItemProvider(
+        PNPMWorkspaceYAMLCompletion.selector,
+        new PNPMWorkspaceYAMLCompletion(),
+        PNPMWorkspaceYAMLCompletion.trigger
+      )
+    );
+  }
+
+  public static registerCodeLensProvider(context: vscode.ExtensionContext) {
+    // vscode.languages.registerCodeLensProvider('*', new CodelensProvider());
+  }
+
+  public static registerDefinitionProvider(context: vscode.ExtensionContext) {
+    context.subscriptions.push();
   }
 }

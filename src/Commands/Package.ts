@@ -10,7 +10,7 @@ import { ExtensionConfiguration } from '../Configurations';
  */
 export class Package {
   // todo: use selected package scripts
-  public static scripts: string[] = ['dev', 'start', 'build'];
+  public static scripts: string[] = ['dev', 'start', 'build', 'install'];
 
   public static operations: PackageFilterType[] = [
     'self',

@@ -44,7 +44,9 @@ export class Package {
         }
 
         const selectedScript = await vscode.window.showQuickPick(
-          Package.scripts
+          Package.scripts.concat(
+            ExtensionConfiguration.extraWorkspaceScript.read()
+          )
         );
 
         if (!selectedScript) {

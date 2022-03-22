@@ -56,8 +56,8 @@ export class ExtensionRegistry {
   public static registerWorkspaceCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       vscode.commands.registerCommand(
-        Utils.composeCommand(Workspace.ToggleWorkspaceFeatureStatus.command),
-        Workspace.ToggleWorkspaceFeatureStatus.callback
+        Utils.composeCommand(Workspace.CreateExtraWorkspaceScripts.command),
+        Workspace.CreateExtraWorkspaceScripts.callback
       )
     );
   }

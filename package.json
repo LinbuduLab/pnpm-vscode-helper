@@ -74,6 +74,11 @@
         "title": "Select workspace packages and execute operations with filters",
         "command": "pnpm-vscode-helper.select-workspace-package",
         "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Create extra workspace package scripts (current workspace only)",
+        "command": "pnpm-vscode-helper.create-extra-workspace-scripts",
+        "category": "PNPM VS Code Helper"
       }
     ],
     "configuration": {
@@ -93,6 +98,10 @@
         "pnpm-vscode-helper.workspacePackages": {
           "type": "object",
           "default": {}
+        },
+        "pnpm-vscode-helper.extraWorkspaceScripts": {
+          "type": "array",
+          "default": []
         },
         "pnpm-vscode-helper.privateExtConfig": {
           "type": "object",

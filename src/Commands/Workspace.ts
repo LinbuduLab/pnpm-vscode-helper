@@ -1,29 +1,23 @@
 import * as vscode from 'vscode';
 import { ICommandRegistry } from '../Utils/Typings';
-import {
-  ExtensionConfiguration,
-  SharedBooleanConfigChoices,
-} from '../Configurations';
+import { ExtensionConfiguration } from '../Configurations';
 
 export class Workspace {
-  public static get supportedChoices(): SharedBooleanConfigChoices {
-    return ['enable', 'disable'];
-  }
-
-  public static get ToggleWorkspaceFeatureStatus(): ICommandRegistry {
+  public static get CreateExtraWorkspaceScripts(): ICommandRegistry {
     return {
-      command: 'toggleWorkspaceFeature',
-      callback: () => {
-        vscode.window.showQuickPick(Workspace.supportedChoices).then((v) => {
-          if (!v) {
-            return;
-          }
-
-          ExtensionConfiguration.workspace.write(v === 'enable');
-          vscode.window.showInformationMessage(
-            '`Workspace` Feature Status Changed! '
-          );
+      command: 'create-extra-workspace-scripts',
+      callback: async (args: any) => {
+        const script = await vscode.window.showInputBox({
+          title: 'Extra script to add',
+          prompt: undefined,
+          placeHolder: "e.g. 'build:prod', 'build:dev', 'develop', ...",
         });
+
+        ExtensionConfiguration.extraWorkspaceScript.write([script ?? '']);
+
+        vscode.window.showInformationMessage(
+          `New workspace script '${script}' added.`
+        );
       },
     };
   }

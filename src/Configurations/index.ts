@@ -2,6 +2,26 @@ import * as vscode from 'vscode';
 import { IConfiguration, Locale } from '../Utils/Typings';
 import { Constants } from '../Constants';
 
+class ExtraWorkspaceScriptsConfigConfiguration
+  implements IConfiguration<string[]>
+{
+  public identifier = 'extraWorkspaceScripts';
+
+  public defaultConfig = [];
+
+  public read(): string[] {
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<string[]>(this.identifier, this.defaultConfig);
+  }
+
+  public write(input: string[]): void {
+    vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .update(this.identifier, input, vscode.ConfigurationTarget.Workspace);
+  }
+}
+
 interface IPrivateConfig {
   username?: string;
   email?: string;
@@ -133,4 +153,7 @@ export class ExtensionConfiguration {
   public static packages = new WorkspacePackagesConfiguration();
 
   public static privateExtConfig = new PrivateExtensionConfigConfiguration();
+
+  public static extraWorkspaceScript =
+    new ExtraWorkspaceScriptsConfigConfiguration();
 }

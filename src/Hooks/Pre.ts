@@ -95,7 +95,7 @@ export class ExtensionPreHook {
 
     const shamefullyHoistEnabled = parsed['shamefully-hoist'] ?? false;
 
-    ExtensionConfiguration.shamefullyHoist.write(shamefullyHoistEnabled);
+    // ExtensionConfiguration.shamefullyHoist.write(shamefullyHoistEnabled);
 
     shamefullyHoistEnabled &&
       vscode.window.showInformationMessage('shamefully-hoist enabled.');

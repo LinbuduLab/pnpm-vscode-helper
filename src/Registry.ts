@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+
 import { Locale } from './Commands/Locale';
 import { CodeLen } from './Commands/CodeLen';
 import { Workspace } from './Commands/Workspace';
@@ -7,19 +8,23 @@ import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
 import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
+
+import { CodelensProvider } from './Providers/CodeLen';
+import { PackageJsonDefinitionProvider } from './Providers/Definition';
+import { PackageJsonHoverProvider } from './Providers/PackageJson.hover';
+import { NPMRCHoverProvider } from './Providers/NPMRC.hover';
 import {
   PnpmConfigurationKeyCompletion,
   PnpmConfigurationCompletion,
+} from './Providers/NPMRC.completion';
+
+import { PNPMWorkspaceYAMLHoverProvider } from './Providers/WorkspaceYAML.hover';
+import {
   PNPMWorkspaceYAMLKeyCompletion,
   PNPMWorkspaceYAMLCompletion,
-} from './Languages/Completion';
-import { CodelensProvider } from './Providers/CodeLen';
+} from './Providers/WorkspaceYAML.completion';
+
 import { Utils } from './utils';
-import {
-  PackageJsonHoverProvider,
-  PNPMWorkspaceYAMLHoverProvider,
-} from './Providers/Hover';
-import { PackageJsonDefinitionProvider } from './Providers/Definition';
 
 export class ExtensionRegistry {
   public static registerLocaleCommand(context: vscode.ExtensionContext) {

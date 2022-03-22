@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { CodeLen } from '../Commands/CodeLen';
+import { ExtensionConfiguration } from '../Configurations';
 import { Constants } from '../Constants';
 import { Utils } from '../Utils';
 
@@ -29,11 +30,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
     document: vscode.TextDocument,
     token: vscode.CancellationToken
   ): vscode.CodeLens[] | Thenable<vscode.CodeLens[]> {
-    if (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get(CodeLen.EnableCodeLen.command, true)
-    ) {
+    if (ExtensionConfiguration.codeLen.read()) {
       this.codeLenses = [];
       const regex = new RegExp(this.regex);
       const text = document.getText();
@@ -46,6 +43,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
           position,
           new RegExp(this.regex)
         );
+        console.log('range: ', range);
         if (range) {
           this.codeLenses.push(new vscode.CodeLens(range));
         }
@@ -59,11 +57,8 @@ export class CodelensProvider implements vscode.CodeLensProvider {
     codeLens: vscode.CodeLens,
     token: vscode.CancellationToken
   ) {
-    if (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get(CodeLen.EnableCodeLen.command, true)
-    ) {
+    console.log('codeLens: ', codeLens);
+    if (ExtensionConfiguration.codeLen.read()) {
       codeLens.command = {
         title: 'Codelens provided by sample extension',
         tooltip: 'Tooltip provided by sample extension',

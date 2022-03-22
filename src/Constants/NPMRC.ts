@@ -1,38 +1,17 @@
 import * as vscode from 'vscode';
 import * as ini from 'ini';
+import { BOOL_COMPLETION_ITEMS } from './Shared';
 
-const BOOL_COMPLETION_ITEMS = ['true', 'false'];
-
-export class NPMRCInitialContent {
-  public static get content(): string {
-    const raw = {
-      hoist: true,
-      shamefullyHoist: false,
-    };
-
-    return ini.stringify(raw);
-  }
-}
-
-export class NPMRCHoverTips {
-  public static ComposeFieldURL(key: string) {
-    return `https://pnpm.io/npmrc#${key}`;
-  }
-}
-
-export const PNPM_WORKSPACE_YAML_ITEMS: Record<string, any[]> = {
-  packages: [],
-  'link-workspace-packages': BOOL_COMPLETION_ITEMS,
-  'prefer-workspace-packages': BOOL_COMPLETION_ITEMS,
-  'shared-workspace-lockfile': BOOL_COMPLETION_ITEMS,
-  'save-workspace-protocol': BOOL_COMPLETION_ITEMS,
-};
-
-export const NPMRC_COMPLETION_ITEMS: Record<string, any[]> = {
+export const NPMRC_COMPLETION_ITEMS = <const>{
   hoist: BOOL_COMPLETION_ITEMS,
   'hoist-pattern': ['[]', "['*']"],
   'public-hoist-pattern': ['[]'],
   'shamefully-hoist': BOOL_COMPLETION_ITEMS,
+  'store-dir': [' ~/.pnpm-store'],
+  'modules-dir': ['node_modules'],
+  'virtual-store-dir': ['node_modules/.pnpm'],
+  lockfile: BOOL_COMPLETION_ITEMS,
+  'prefer-frozen-lockfile': BOOL_COMPLETION_ITEMS,
   registry: [
     'https://registry.npmjs.org/',
     'https://registry.yarnpkg.com',
@@ -42,12 +21,38 @@ export const NPMRC_COMPLETION_ITEMS: Record<string, any[]> = {
   'strict-peer-dependencies': BOOL_COMPLETION_ITEMS,
 };
 
+export type NPMRCKeyUnions = keyof typeof NPMRC_COMPLETION_ITEMS;
+
 export const NPMRC_COMPLETION_KEYS = Object.keys(NPMRC_COMPLETION_ITEMS);
 
-export const PNPM_WORKSPACE_YAML_KEYS = Object.keys(PNPM_WORKSPACE_YAML_ITEMS);
-
 export class NPMRCCompletionItemss {
-  public static GetCompletionItem(key: string) {
+  public static GetCompletionItem(key: NPMRCKeyUnions) {
     return NPMRC_COMPLETION_ITEMS[key] ?? null;
+  }
+}
+
+export class NPMRCInitialContent {
+  public static get content(): string {
+    const raw: Record<NPMRCKeyUnions, any> = {
+      hoist: true,
+      'hoist-pattern': ['*'],
+      'public-hoist-pattern': [
+        '*types*',
+        '*eslint*',
+        '@prettier/plugin-*',
+        '*prettier-plugin-*',
+      ],
+      'shamefully-hoist': false,
+      'store-dir': '~/.pnpm-store',
+      'modules-dir': 'node_modules',
+      'virtual-store-dir': 'node_modules/.pnpm',
+      lockfile: true,
+      'prefer-frozen-lockfile': true,
+      registry: ' https://registry.npmjs.org/',
+      'auto-install-peers': false,
+      'strict-peer-dependencies': false,
+    };
+
+    return ini.stringify(raw);
   }
 }

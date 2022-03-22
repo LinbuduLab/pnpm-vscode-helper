@@ -8,7 +8,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // --- COMMAND START ---
   ExtensionRegistry.registerLocaleCommand(context);
-  // ExtensionRegistry.registerCodeLenCommand(context);
+  ExtensionRegistry.registerCodeLenCommand(context);
   ExtensionRegistry.registerWorkspaceCommand(context);
   ExtensionRegistry.registerPrivateExtensionConfigCommand(context);
   ExtensionRegistry.registerCreatorCommand(context);
@@ -19,7 +19,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // --- PROVIDER START ---
   ExtensionRegistry.registerCompletionProviders(context);
-  // ExtensionRegistry.registerCodeLensProvider(context);
+  ExtensionRegistry.registerCodeLensProvider(context);
   ExtensionRegistry.registerHoverProvider(context);
   ExtensionRegistry.registerDefinitionProvider(context);
   // -- PROVIDER END ---

@@ -1,5 +1,18 @@
 import * as vscode from 'vscode';
 import * as yaml from 'js-yaml';
+import { BOOL_COMPLETION_ITEMS } from './Shared';
+
+export const PNPM_WORKSPACE_YAML_ITEMS = <const>{
+  packages: [],
+  'link-workspace-packages': BOOL_COMPLETION_ITEMS,
+  'prefer-workspace-packages': BOOL_COMPLETION_ITEMS,
+  'shared-workspace-lockfile': BOOL_COMPLETION_ITEMS,
+  'save-workspace-protocol': BOOL_COMPLETION_ITEMS,
+};
+
+export type PNPMWorkspaceYAMLKeyUnions = keyof typeof PNPM_WORKSPACE_YAML_ITEMS;
+
+export const PNPM_WORKSPACE_YAML_KEYS = Object.keys(PNPM_WORKSPACE_YAML_ITEMS);
 
 export class WorkspaceYAMLInitialContent {
   public static get content(): string {

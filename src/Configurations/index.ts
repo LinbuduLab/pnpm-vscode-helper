@@ -15,11 +15,9 @@ class PrivateExtensionConfigConfiguration
   public defaultConfig = {};
 
   public read(): IPrivateConfig {
-    return (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get<IPrivateConfig>(this.identifier) ?? this.defaultConfig
-    );
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<IPrivateConfig>(this.identifier, this.defaultConfig);
   }
 
   public write(input: IPrivateConfig): void {
@@ -35,11 +33,9 @@ class CodeLenConfiguration implements IConfiguration<boolean> {
   public defaultConfig = false;
 
   public read() {
-    return (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get<boolean>(this.identifier) ?? this.defaultConfig
-    );
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<boolean>(this.identifier, this.defaultConfig);
   }
 
   public write(input: boolean): void {
@@ -55,11 +51,9 @@ class LocaleConfigurations implements IConfiguration<Locale> {
   public defaultConfig: Locale = 'en-US';
 
   public read() {
-    return (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get<Locale>(this.identifier) ?? this.defaultConfig
-    );
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<Locale>(this.identifier, this.defaultConfig);
   }
 
   public write(input: Locale): void {
@@ -77,11 +71,9 @@ class WorkspaceFeatureConfiguration implements IConfiguration<boolean> {
   public defaultConfig = true;
 
   public read() {
-    return (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get<boolean>(this.identifier) ?? this.defaultConfig
-    );
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<boolean>(this.identifier, this.defaultConfig);
   }
 
   public write(input: boolean): void {
@@ -97,11 +89,9 @@ class ShamefullyHoistConfiguration implements IConfiguration<boolean> {
   public defaultConfig = false;
 
   public read() {
-    return (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get<boolean>(this.identifier) ?? this.defaultConfig
-    );
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<boolean>(this.identifier, this.defaultConfig);
   }
 
   public write(input: boolean): void {
@@ -119,11 +109,9 @@ class WorkspacePackagesConfiguration
   public defaultConfig = {};
 
   public read() {
-    return (
-      vscode.workspace
-        .getConfiguration(Constants.ExtensionIdentifier)
-        .get<Record<string, string>>(this.identifier) ?? this.defaultConfig
-    );
+    return vscode.workspace
+      .getConfiguration(Constants.ExtensionIdentifier)
+      .get<Record<string, string>>(this.identifier, this.defaultConfig);
   }
 
   public write(input: Record<string, string>): void {

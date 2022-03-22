@@ -11,7 +11,7 @@ export class TerminalUtils {
     );
 
     const locationArgs = packagesFilter.length
-      ? `${packagesFilter.map((filter) => `--filter="${filter}"`).join(' ')}`
+      ? `${packagesFilter.map((filter) => `--filter='${filter}'`).join(' ')}`
       : '--workspace-root';
 
     depsTerminal.show(false);
@@ -27,7 +27,7 @@ export class TerminalUtils {
     );
 
     const locationArgs = packagesFilter.length
-      ? `${packagesFilter.map((filter) => `--filter="${filter}"`).join(' ')}`
+      ? `${packagesFilter.map((filter) => `--filter='${filter}'`).join(' ')}`
       : '--workspace-root';
 
     depsTerminal.show(false);
@@ -43,7 +43,7 @@ export class TerminalUtils {
     );
 
     const locationArgs = packagesFilter.length
-      ? `${packagesFilter.map((filter) => `--filter="${filter}"`).join(' ')}`
+      ? `${packagesFilter.map((filter) => `--filter='${filter}'`).join(' ')}`
       : '--workspace-root';
 
     devDepsTerminal.show(false);
@@ -68,7 +68,7 @@ export class TerminalUtils {
 
     executionTerminal.show(false);
     executionTerminal.sendText(
-      `pnpm ${script === 'install' ? '' : 'run'} ${script} ${locationArgs}`
+      `pnpm${script === 'install' ? '' : ' run'} ${script} ${locationArgs}`
     );
   }
 }

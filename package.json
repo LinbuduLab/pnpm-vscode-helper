@@ -10,8 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onStartupFinished",
-    "workspaceContains:pnpm-workspace.yaml"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {

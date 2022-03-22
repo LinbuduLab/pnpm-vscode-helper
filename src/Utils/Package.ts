@@ -7,16 +7,16 @@ export class PackageUtils {
   ) {
     const filterArgs =
       executeType === 'self'
-        ? targetPackage
+        ? `'${targetPackage}'`
         : executeType === 'withDependencies'
-        ? `${targetPackage}...`
+        ? `'${targetPackage}...'`
         : executeType === 'withDependents'
-        ? `...${targetPackage}`
+        ? `'...${targetPackage}'`
         : executeType === 'dependenciesOnly'
-        ? `${targetPackage}^...`
+        ? `'${targetPackage}^...'`
         : executeType === 'dependentsOnly'
-        ? `...^${targetPackage}`
-        : targetPackage;
+        ? `'...^${targetPackage}'`
+        : `'${targetPackage}'`;
 
     const locationArgs = `--filter=${filterArgs}`;
 

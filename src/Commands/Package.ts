@@ -87,13 +87,44 @@ export class Package {
   }
 
   // [groupName, [packages]]
-  public GroupPackages(): ICommandRegistry {
+  public static get GroupWorkspacePackages(): ICommandRegistry {
     return {
       command: 'grouping-packages',
       callback: async (args: any) => {
-        // select packages
-        // create group
-        // save settings
+        const workspacePackages =
+          (await Utils.Workspace.collectWorkspacePackages()) ?? {};
+
+        const workspacePackagesChoices = Object.keys(workspacePackages);
+
+        if (!workspacePackagesChoices.length) {
+          vscode.window.showInformationMessage(
+            'No packages found in current workspace'
+          );
+        }
+
+        const selectedTargetPackage = await vscode.window.showQuickPick(
+          workspacePackagesChoices,
+          { canPickMany: true }
+        );
+
+        if (!selectedTargetPackage?.length) {
+          return;
+        }
+
+        const groupIdentifier = await vscode.window.showInputBox({
+          title: 'Input group name',
+          placeHolder: "e.g. 'Node-Project', 'React-Project'",
+        });
+
+        if (!groupIdentifier) {
+          return;
+        }
+
+        ExtensionConfiguration.workspacePackageGroup.write(
+          ExtensionConfiguration.workspacePackageGroup
+            .read()
+            .concat([[groupIdentifier, selectedTargetPackage]])
+        );
       },
     };
   }

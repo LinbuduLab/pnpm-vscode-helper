@@ -108,6 +108,10 @@ export class ExtensionRegistry {
       vscode.commands.registerCommand(
         Utils.composeCommand(Package.SelectPackage.command),
         Package.SelectPackage.callback
+      ),
+      vscode.commands.registerCommand(
+        Utils.composeCommand(Package.GroupWorkspacePackages.command),
+        Package.GroupWorkspacePackages.callback
       )
     );
   }

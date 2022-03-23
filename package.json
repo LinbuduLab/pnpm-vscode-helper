@@ -108,6 +108,10 @@
           "type": "array",
           "default": []
         },
+        "pnpm-vscode-helper.workspacePackageGroups": {
+          "type": "array",
+          "default": []
+        },
         "pnpm-vscode-helper.privateExtConfig": {
           "type": "object",
           "properties": {

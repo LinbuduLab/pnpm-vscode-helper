@@ -2,15 +2,13 @@ import * as vscode from 'vscode';
 import { Utils } from '../Utils';
 import { ICommandRegistry, PackageFilterType } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
-
-/**
- * we provide 2 ways to execute package task:
- * - select a package, choose the behavior
- * - select a behavior, choose the package
- */
+import * as path from 'path';
+import { PackageJson } from 'type-fest';
+import { uniq } from 'lodash';
 export class Package {
   // todo: use selected package scripts
-  public static scripts: string[] = ['dev', 'start', 'build', 'install'];
+  // public static scripts: string[] = ['dev', 'start', 'build', 'install'];
+  public static scripts: string[] = [];
 
   public static operations: PackageFilterType[] = [
     'self',
@@ -43,9 +41,27 @@ export class Package {
           return;
         }
 
+        const selectedPackagePackageJson = path.posix.resolve(
+          workspacePackages[selectedTargetPackage],
+          'package.json'
+        );
+
+        const packageJsonContent = await vscode.workspace.fs.readFile(
+          vscode.Uri.from({
+            scheme: 'file',
+            path: selectedPackagePackageJson,
+          })
+        );
+
+        const { scripts = {} } = <PackageJson>(
+          JSON.parse(packageJsonContent.toString())
+        );
+
         const selectedScript = await vscode.window.showQuickPick(
-          Package.scripts.concat(
-            ExtensionConfiguration.extraWorkspaceScript.read()
+          uniq(
+            Package.scripts
+              .concat(ExtensionConfiguration.extraWorkspaceScript.read())
+              .concat(Object.keys(scripts))
           )
         );
 
@@ -66,6 +82,18 @@ export class Package {
           selectedScript,
           selectedOperation
         );
+      },
+    };
+  }
+
+  // [groupName, [packages]]
+  public GroupPackages(): ICommandRegistry {
+    return {
+      command: 'grouping-packages',
+      callback: async (args: any) => {
+        // select packages
+        // create group
+        // save settings
       },
     };
   }

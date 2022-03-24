@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LinbuduLab/pnpm-vscode-helper/main/assets/pnpm-logo.png?raw=true" alt="pnpm-vscode-helper" width="150">
-   <img src="https://raw.githubusercontent.com/LinbuduLab/pnpm-vscode-helper/main/assets/vscode-logo.png?raw=true" alt="pnpm-vscode-helper" width="230">
+  <img src="https://raw.githubusercontent.com/LinbuduLab/pnpm-vscode-helper/main/assets/pnpm-logo.png?raw=true" alt="pnpm-icon" width="150">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <img src="https://raw.githubusercontent.com/LinbuduLab/pnpm-vscode-helper/main/assets/vscode-logo-forked.png?raw=true" alt="vscode-icon" width="150">
   <br>
 </p>
 <h1 align="center"> pnpm-vscode-helper </h1>

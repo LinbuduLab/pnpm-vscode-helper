@@ -23,13 +23,6 @@ export class Install {
     };
   }
 
-  public static get CheckDepsUpdateForSelectedPackages(): ICommandRegistry {
-    return {
-      command: 'check-deps-update-for-selected-packages',
-      callback: async (args: any) => {},
-    };
-  }
-
   public static get InstallSelectPackagesDepsOnly(): ICommandRegistry {
     return {
       command: 'install-selected-packages-deps',

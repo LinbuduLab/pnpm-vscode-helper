@@ -13,7 +13,7 @@
 
 ## Commands
 
-### Creator
+### Create
 
 ### Init
 

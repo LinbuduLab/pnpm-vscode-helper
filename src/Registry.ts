@@ -1,10 +1,9 @@
 import * as vscode from 'vscode';
 
-import { Locale } from './Commands/Locale';
-import { CodeLen } from './Commands/CodeLen';
 import { Workspace } from './Commands/Workspace';
 import { ScanWorkspace } from './Commands/Scanner';
 import { CheckDepUpdates } from './Commands/CheckDepUpdates';
+import { Configure } from './Commands/Configure';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
@@ -25,52 +24,31 @@ import {
 } from './Providers/WorkspaceYAML.completion';
 
 import { Utils } from './utils';
+import { RegisterHelper } from './Utils/RegisterHelper';
 
 export class ExtensionRegistry {
   public static registerCheckDepsUpdateCommand(
     context: vscode.ExtensionContext
   ) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(CheckDepUpdates.Update.command),
-        CheckDepUpdates.Update.callback
-      )
+      RegisterHelper.registerCommand(CheckDepUpdates.Update)
     );
-  }
-  public static registerLocaleCommand(context: vscode.ExtensionContext) {
-    context.subscriptions
-      .push
-      // Locale
-      // vscode.commands.registerCommand(
-      //   Utils.composeCommand(Locale.ToggleLocale.command),
-      //   Locale.ToggleLocale.callback
-      // )
-      ();
   }
 
-  public static registerCodeLenCommand(context: vscode.ExtensionContext) {
+  public static registerCongifureCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(CodeLen.EnableCodeLen.command),
-        CodeLen.EnableCodeLen.callback
-      ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(CodeLen.DisableCodeLen.command),
-        CodeLen.DisableCodeLen.callback
-      ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
-        CodeLen.CodeLenClickHandler.callback
-      )
+      RegisterHelper.registerCommand(Configure.ToggleCodelenseStatus),
+      RegisterHelper.registerCommand(Configure.ToggleHoverProviderStatus),
+      RegisterHelper.registerCommand(Configure.ToggleCompletionProviderStatus),
+      RegisterHelper.registerCommand(Configure.ToggleLocaleProviderStatus)
     );
   }
+
+  public static registerCodeLenCommand(context: vscode.ExtensionContext) {}
 
   public static registerWorkspaceCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Workspace.CreateExtraWorkspaceScripts.command),
-        Workspace.CreateExtraWorkspaceScripts.callback
-      )
+      RegisterHelper.registerCommand(Workspace.CreateExtraWorkspaceScripts)
     );
   }
 
@@ -78,72 +56,40 @@ export class ExtensionRegistry {
     context: vscode.ExtensionContext
   ) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(
-          PrivateExtensionConfigure.CreatePrivateConfig.command
-        ),
-        PrivateExtensionConfigure.CreatePrivateConfig.callback
+      RegisterHelper.registerCommand(
+        PrivateExtensionConfigure.CreatePrivateConfig
       ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(
-          PrivateExtensionConfigure.RemovePrivateConfig.command
-        ),
-        PrivateExtensionConfigure.RemovePrivateConfig.callback
+      RegisterHelper.registerCommand(
+        PrivateExtensionConfigure.RemovePrivateConfig
       )
     );
   }
 
   public static registerScanWorkspaceCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(ScanWorkspace.Scan.command),
-        ScanWorkspace.Scan.callback
-      )
+      RegisterHelper.registerCommand(ScanWorkspace.Scan)
     );
   }
 
   public static registerCreatorCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Creator.CreateNPMRCConfig.command),
-        Creator.CreateNPMRCConfig.callback
-      ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Creator.CreatePNPMWorkspaceConfig.command),
-        Creator.CreatePNPMWorkspaceConfig.callback
-      )
+      RegisterHelper.registerCommand(Creator.CreateNPMRCConfig),
+      RegisterHelper.registerCommand(Creator.CreatePNPMWorkspaceConfig)
     );
   }
 
   public static registerPackageCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Package.SelectPackage.command),
-        Package.SelectPackage.callback
-      ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Package.GroupWorkspacePackages.command),
-        Package.GroupWorkspacePackages.callback
-      )
+      RegisterHelper.registerCommand(Package.SelectPackage),
+      RegisterHelper.registerCommand(Package.GroupWorkspacePackages)
     );
   }
 
   public static registerInstallCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Install.InstallWorkspaceRootDepsOnly.command),
-        Install.InstallWorkspaceRootDepsOnly.callback
-      ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(Install.InstallSelectPackagesDepsOnly.command),
-        Install.InstallSelectPackagesDepsOnly.callback
-      ),
-      vscode.commands.registerCommand(
-        Utils.composeCommand(
-          Install.CheckDepsUpdateForSelectedPackages.command
-        ),
-        Install.CheckDepsUpdateForSelectedPackages.callback
-      )
+      RegisterHelper.registerCommand(Install.InstallWorkspaceRootDepsOnly),
+      RegisterHelper.registerCommand(Install.InstallSelectPackagesDepsOnly),
+      RegisterHelper.registerCommand(Install.InstallSelectPackagesDepsOnly)
     );
   }
 

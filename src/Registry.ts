@@ -25,6 +25,7 @@ import {
 
 import { Utils } from './utils';
 import { RegisterHelper } from './Utils/RegisterHelper';
+import { CodeLen } from './Commands/CodeLen';
 
 export class ExtensionRegistry {
   public static registerCheckDepsUpdateCommand(
@@ -44,7 +45,9 @@ export class ExtensionRegistry {
     );
   }
 
-  public static registerCodeLenCommand(context: vscode.ExtensionContext) {}
+  public static registerCodeLenCommand(context: vscode.ExtensionContext) {
+    RegisterHelper.registerCommand(CodeLen.CodeLenClickHandler);
+  }
 
   public static registerWorkspaceCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
@@ -88,7 +91,6 @@ export class ExtensionRegistry {
   public static registerInstallCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       RegisterHelper.registerCommand(Install.InstallWorkspaceRootDepsOnly),
-      RegisterHelper.registerCommand(Install.InstallSelectPackagesDepsOnly),
       RegisterHelper.registerCommand(Install.InstallSelectPackagesDepsOnly)
     );
   }

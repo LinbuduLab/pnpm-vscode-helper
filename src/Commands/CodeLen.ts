@@ -1,43 +1,43 @@
 import * as vscode from 'vscode';
 import { ICommandRegistry } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
+import { Utils } from '../Utils';
+import path = require('path');
 
 export class CodeLen {
-  public static get EnableCodeLen(): ICommandRegistry {
-    return {
-      command: 'enableCodeLens',
-      callback: () => {
-        ExtensionConfiguration.codeLen.write(true);
-
-        const locale = ExtensionConfiguration.locale.read();
-        vscode.window.showInformationMessage(
-          locale === 'en-US' ? `PNPM CodeLens Enabled.` : 'PNPM 智能提示已启用'
-        );
-      },
-    };
-  }
-
-  public static get DisableCodeLen(): ICommandRegistry {
-    return {
-      command: 'disableCodeLens',
-      callback: () => {
-        ExtensionConfiguration.codeLen.write(false);
-
-        const locale = ExtensionConfiguration.locale.read();
-        vscode.window.showInformationMessage(
-          locale === 'en-US' ? `PNPM CodeLens Disabled.` : 'PNPM 智能提示已禁用'
-        );
-      },
-    };
-  }
-
   public static get CodeLenClickHandler(): ICommandRegistry {
     return {
       command: 'codelensAction',
-      callback: (args: any) => {
+      callback: async (packageName: string) => {
         vscode.window.showInformationMessage(
-          `CodeLens action clicked with args=${args}`
+          `CodeLens action clicked with args=${packageName}`
         );
+        const workspacePackages =
+          (await Utils.Workspace.collectWorkspacePackages()) ?? {};
+
+        if (!(packageName in workspacePackages)) {
+          vscode.window.showInformationMessage(
+            `Package '${packageName}' not found in current workspace.`
+          );
+          return;
+        }
+
+        const opened = await vscode.workspace.openTextDocument(
+          vscode.Uri.from({
+            scheme: 'file',
+            path: path.posix.resolve(
+              workspacePackages[packageName],
+              'package.json'
+            ),
+          })
+        );
+
+        await vscode.window.showTextDocument(
+          opened,
+          vscode.ViewColumn.Active,
+          false
+        );
+        // try open package.json main > ?
       },
     };
   }

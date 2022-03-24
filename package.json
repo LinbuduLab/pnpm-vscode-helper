@@ -46,8 +46,13 @@
         "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Codelens Handler",
+        "command": "pnpm-vscode-helper.codelensAction",
+        "category": "PNPM VS Code Helper"
+      },
+      {
         "title": "Enable CodeLens",
-        "command": "pnpm-vscode-helper.enableCodeLens",
+        "command": "pnpm-vscode-helper.enable-codelense",
         "category": "PNPM VS Code Helper"
       },
       {

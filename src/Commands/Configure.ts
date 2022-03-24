@@ -11,8 +11,10 @@ import { LocaleFactory } from '../Locales';
 export class Configure {
   public static get ToggleCodelenseStatus(): ICommandRegistry {
     return {
-      command: 'sample-command1',
-      callback: async (args: any) => {},
+      command: 'enable-codelense',
+      callback: async (args: any) => {
+        ExtensionConfiguration.codeLen.write(true);
+      },
     };
   }
 

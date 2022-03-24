@@ -3,35 +3,21 @@ import { ICommandRegistry } from '../Utils/Typings';
 import { Utils } from '../Utils';
 import { ExtensionConfiguration } from '../Configurations';
 import * as ncu from 'npm-check-updates';
-import * as path from 'path';
 
 export class CheckDepUpdates {
   public static get Update(): ICommandRegistry {
     return {
       command: 'check-dep-updates',
       callback: async (args: any) => {
-        const workspacePackages =
-          (await Utils.Workspace.collectWorkspacePackages()) ?? {};
-
-        const workspacePackagesChoices = Object.keys(workspacePackages);
-
-        if (!workspacePackagesChoices.length) {
-          vscode.window.showInformationMessage(
-            'No packages found in current workspace'
-          );
-        }
-
-        const selectedTargetPackage = await vscode.window.showQuickPick(
-          workspacePackagesChoices,
-          {
-            canPickMany: true,
-            placeHolder: 'Select packages you want to update deps for',
-          }
+        const selectedInfo = await Utils.Workspace.selectMultiplePackages(
+          'No packages found in current workspace'
         );
 
-        if (!selectedTargetPackage?.length) {
+        if (!selectedInfo) {
           return;
         }
+
+        const { selectedTargetPackage, workspacePackages } = selectedInfo;
 
         const promises = selectedTargetPackage.map((p) => {
           return ncu.run({

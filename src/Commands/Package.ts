@@ -91,25 +91,13 @@ export class Package {
     return {
       command: 'grouping-packages',
       callback: async (args: any) => {
-        const workspacePackages =
-          (await Utils.Workspace.collectWorkspacePackages()) ?? {};
+        const selectedInfo = await Utils.Workspace.selectMultiplePackages();
 
-        const workspacePackagesChoices = Object.keys(workspacePackages);
-
-        if (!workspacePackagesChoices.length) {
-          vscode.window.showInformationMessage(
-            'No packages found in current workspace'
-          );
-        }
-
-        const selectedTargetPackage = await vscode.window.showQuickPick(
-          workspacePackagesChoices,
-          { canPickMany: true }
-        );
-
-        if (!selectedTargetPackage?.length) {
+        if (!selectedInfo) {
           return;
         }
+
+        const { selectedTargetPackage } = selectedInfo;
 
         const groupIdentifier = await vscode.window.showInputBox({
           title: 'Input group name',

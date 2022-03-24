@@ -112,4 +112,31 @@ export class WorkspaceUtils {
 
     return packageInfos;
   }
+
+  public static async selectMultiplePackages(placeHolder?: string) {
+    const workspacePackages =
+      (await Utils.Workspace.collectWorkspacePackages()) ?? {};
+
+    const workspacePackagesChoices = Object.keys(workspacePackages);
+
+    if (!workspacePackagesChoices.length) {
+      vscode.window.showInformationMessage(
+        'No packages found in current workspace'
+      );
+    }
+
+    const selectedTargetPackage = await vscode.window.showQuickPick(
+      workspacePackagesChoices,
+      { canPickMany: true, placeHolder }
+    );
+
+    if (!selectedTargetPackage?.length) {
+      return null;
+    }
+
+    return {
+      workspacePackages,
+      selectedTargetPackage,
+    };
+  }
 }

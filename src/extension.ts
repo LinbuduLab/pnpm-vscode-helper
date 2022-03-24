@@ -8,6 +8,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // --- COMMAND START ---
   ExtensionRegistry.registerLocaleCommand(context);
+  ExtensionRegistry.registerCheckDepsUpdateCommand(context);
   ExtensionRegistry.registerCodeLenCommand(context);
   ExtensionRegistry.registerWorkspaceCommand(context);
   ExtensionRegistry.registerPrivateExtensionConfigCommand(context);

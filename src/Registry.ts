@@ -4,12 +4,13 @@ import { Locale } from './Commands/Locale';
 import { CodeLen } from './Commands/CodeLen';
 import { Workspace } from './Commands/Workspace';
 import { ScanWorkspace } from './Commands/Scanner';
+import { CheckDepUpdates } from './Commands/CheckDepUpdates';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
 import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
 
-import { CodelensProvider } from './Providers/CodeLen';
+import { WorkspaceProtocolCodelenseProvider } from './Providers/WorkspaceProtocol.codelense';
 import { PackageJsonHoverProvider } from './Providers/PackageJson.hover';
 import { NPMRCHoverProvider } from './Providers/NPMRC.hover';
 import {
@@ -26,14 +27,25 @@ import {
 import { Utils } from './utils';
 
 export class ExtensionRegistry {
-  public static registerLocaleCommand(context: vscode.ExtensionContext) {
+  public static registerCheckDepsUpdateCommand(
+    context: vscode.ExtensionContext
+  ) {
     context.subscriptions.push(
-      // Locale
       vscode.commands.registerCommand(
-        Utils.composeCommand(Locale.ToggleLocale.command),
-        Locale.ToggleLocale.callback
+        Utils.composeCommand(CheckDepUpdates.Update.command),
+        CheckDepUpdates.Update.callback
       )
     );
+  }
+  public static registerLocaleCommand(context: vscode.ExtensionContext) {
+    context.subscriptions
+      .push
+      // Locale
+      // vscode.commands.registerCommand(
+      //   Utils.composeCommand(Locale.ToggleLocale.command),
+      //   Locale.ToggleLocale.callback
+      // )
+      ();
   }
 
   public static registerCodeLenCommand(context: vscode.ExtensionContext) {
@@ -178,7 +190,10 @@ export class ExtensionRegistry {
   }
 
   public static registerCodeLensProvider(context: vscode.ExtensionContext) {
-    // vscode.languages.registerCodeLensProvider('*', new CodelensProvider());
+    vscode.languages.registerCodeLensProvider(
+      '*',
+      new WorkspaceProtocolCodelenseProvider()
+    );
   }
 
   public static registerDefinitionProvider(context: vscode.ExtensionContext) {

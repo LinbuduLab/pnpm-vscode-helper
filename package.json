@@ -84,6 +84,11 @@
         "title": "Grouping workspace packages",
         "command": "pnpm-vscode-helper.grouping-packages",
         "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Check and update package deps",
+        "command": "pnpm-vscode-helper.check-dep-updates",
+        "category": "PNPM VS Code Helper"
       }
     ],
     "configuration": {
@@ -159,6 +164,7 @@
     "ini": "^2.0.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
+    "npm-check-updates": "^12.5.4",
     "rc-parser": "^1.0.2"
   }
 }

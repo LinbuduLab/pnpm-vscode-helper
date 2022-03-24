@@ -1,13 +1,14 @@
 import * as vscode from 'vscode';
 import { CodeLen } from '../Commands/CodeLen';
 import { ExtensionConfiguration } from '../Configurations';
-import { Constants } from '../Constants';
 import { Utils } from '../Utils';
 
 /**
  * CodelensProvider
  */
-export class CodelensProvider implements vscode.CodeLensProvider {
+export class WorkspaceProtocolCodelenseProvider
+  implements vscode.CodeLensProvider
+{
   private codeLenses: vscode.CodeLens[] = [];
 
   private regex: RegExp;

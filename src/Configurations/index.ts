@@ -2,20 +2,23 @@ import { LocaleConfigurations } from './Locale';
 import {
   ShamefullyHoistConfiguration,
   WorkspacePackagesConfiguration,
-  ExtraWorkspaceScriptsConfigConfiguration,
 } from './Preserved';
 import { WorkspacePackageGroupConfiguration } from './WorkspacePackageGroup';
 import { CodelenConfiguration } from './Codelen';
 import { PrivateExtensionConfigConfiguration } from './Private';
+import { ExtraWorkspaceScriptsConfigConfiguration } from './ExtraWorkspaceScripts';
 
 export class ExtensionConfiguration {
   public static locale = new LocaleConfigurations();
 
   public static codeLen = new CodelenConfiguration();
 
-  public static shamefullyHoist = new ShamefullyHoistConfiguration();
+  public static __shamefullyHoist = new ShamefullyHoistConfiguration();
 
-  public static packages = new WorkspacePackagesConfiguration();
+  /**
+   * @deprecated
+   */
+  public static __packages = new WorkspacePackagesConfiguration();
 
   public static privateExtConfig = new PrivateExtensionConfigConfiguration();
 

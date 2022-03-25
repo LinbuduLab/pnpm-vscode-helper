@@ -5,8 +5,8 @@ import { ExtensionExperimentalHook } from './Experimentals';
 export class ExtensionHooks {
   public static async execute(context: vscode.ExtensionContext) {
     await ExtensionExperimentalHook.experimentalWorks(context);
-    await ExtensionPreHook.preCheckShamefullyHoistConfig();
-    // we change to do this as-needed
+    // we now do this step as-needed for the reality
+    // await ExtensionPreHook.preCheckShamefullyHoistConfig();
     // await ExtensionPreHook.preCollectWorkspacePackages();
   }
 }

@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
-import { IConfiguration, Locale } from '../Utils/Typings';
+import { IConfiguration } from '../Utils/Typings';
 import { Constants } from '../Constants';
 
 export class CodelenConfiguration implements IConfiguration<boolean> {
-  public identifier = 'enableCodeLens';
+  public identifier = 'enableCodelen';
 
-  public defaultConfig = false;
+  public defaultConfig = true;
 
   public read() {
     return vscode.workspace

@@ -98,7 +98,7 @@
     ],
     "configuration": {
       "properties": {
-        "pnpm-vscode-helper.enableCodeLens": {
+        "pnpm-vscode-helper.enableCodelen": {
           "type": "boolean",
           "default": true
         },
@@ -112,7 +112,8 @@
         },
         "pnpm-vscode-helper.workspacePackages": {
           "type": "object",
-          "default": {}
+          "default": {},
+          "description": "deprecated"
         },
         "pnpm-vscode-helper.extraWorkspaceScripts": {
           "type": "array",

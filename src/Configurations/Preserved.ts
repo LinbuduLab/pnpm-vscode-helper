@@ -3,7 +3,7 @@ import { IConfiguration } from '../Utils/Typings';
 import { Constants } from '../Constants';
 
 export class ShamefullyHoistConfiguration implements IConfiguration<boolean> {
-  public identifier = 'shamefullyHoist';
+  public identifier = 'shamefullyHoistEnabled';
 
   public defaultConfig = false;
 
@@ -34,26 +34,6 @@ export class WorkspacePackagesConfiguration
   }
 
   public write(input: Record<string, string>): void {
-    vscode.workspace
-      .getConfiguration(Constants.ExtensionIdentifier)
-      .update(this.identifier, input, vscode.ConfigurationTarget.Workspace);
-  }
-}
-
-export class ExtraWorkspaceScriptsConfigConfiguration
-  implements IConfiguration<string[]>
-{
-  public identifier = 'extraWorkspaceScripts';
-
-  public defaultConfig = [];
-
-  public read(): string[] {
-    return vscode.workspace
-      .getConfiguration(Constants.ExtensionIdentifier)
-      .get<string[]>(this.identifier, this.defaultConfig);
-  }
-
-  public write(input: string[]): void {
     vscode.workspace
       .getConfiguration(Constants.ExtensionIdentifier)
       .update(this.identifier, input, vscode.ConfigurationTarget.Workspace);

@@ -11,6 +11,9 @@ import { ExtensionConfiguration } from '../Configurations';
 import { Utils } from '../Utils';
 
 export class ExtensionPreHook {
+  /**
+   * @deprecated
+   */
   public static async preCollectWorkspacePackages() {
     const pnpmWorkspaceConfigFile = await vscode.workspace.findFiles(
       'pnpm-workspace.yaml',
@@ -73,7 +76,7 @@ export class ExtensionPreHook {
       }
     }
 
-    ExtensionConfiguration.packages.write(packageInfos);
+    ExtensionConfiguration.__packages.write(packageInfos);
   }
 
   public static async preCheckShamefullyHoistConfig() {

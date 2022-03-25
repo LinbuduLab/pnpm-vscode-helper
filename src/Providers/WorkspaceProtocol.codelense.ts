@@ -64,8 +64,8 @@ export class WorkspaceProtocolCodelenseProvider
     }
 
     codeLens.command = {
-      title: 'Codelens provided by sample extension',
-      tooltip: 'Tooltip provided by sample extension',
+      title: 'Click to open workspace package folder',
+      // tooltip: 'Tooltip provided by sample extension',
       command: Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
       arguments: ['cra-ts'],
     };

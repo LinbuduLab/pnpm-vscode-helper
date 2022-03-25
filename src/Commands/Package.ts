@@ -34,7 +34,10 @@ export class Package {
         }
 
         const selectedTargetPackage = await vscode.window.showQuickPick(
-          workspacePackagesChoices
+          workspacePackagesChoices,
+          {
+            title: 'Select target package',
+          }
         );
 
         if (!selectedTargetPackage) {
@@ -62,7 +65,11 @@ export class Package {
             Package.scripts
               .concat(ExtensionConfiguration.extraWorkspaceScript.read())
               .concat(Object.keys(scripts))
-          )
+          ),
+          {
+            title: 'Select project script',
+            placeHolder: `Selected project: ${selectedTargetPackage}`,
+          }
         );
 
         if (!selectedScript) {
@@ -70,7 +77,10 @@ export class Package {
         }
 
         const selectedOperation = <PackageFilterType>(
-          await vscode.window.showQuickPick(Package.operations)
+          await vscode.window.showQuickPick(Package.operations, {
+            title: 'Select filter type',
+            placeHolder: `Selected project: ${selectedTargetPackage}, selected script: ${selectedScript}`,
+          })
         );
 
         if (!selectedOperation) {

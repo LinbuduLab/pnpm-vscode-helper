@@ -40,10 +40,10 @@ export class Install {
         const selectedTargetPackages = await vscode.window.showQuickPick(
           workspacePackagesChoices,
           {
-            title: 'Package Selector',
+            title: 'Select workspace packages',
             canPickMany: true,
             placeHolder:
-              'Select packages which you want to install dependencies',
+              'Select packages you want to install dependencies for:',
           }
         );
 

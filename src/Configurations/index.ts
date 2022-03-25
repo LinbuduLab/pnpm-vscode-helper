@@ -11,8 +11,7 @@ import { ExtraWorkspaceScriptsConfigConfiguration } from './ExtraWorkspaceScript
 export class ExtensionConfiguration {
   public static locale = new LocaleConfigurations();
 
-  public static codeLen = new CodelenConfiguration();
-
+  public static codelen = new CodelenConfiguration();
   public static __shamefullyHoist = new ShamefullyHoistConfiguration();
 
   /**

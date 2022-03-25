@@ -10,10 +10,7 @@ export class Creator {
     return {
       command: 'create-npm-rc-config',
       callback: (args: any) => {
-        Utils.Workspace.createFile(
-          '/extension-tmp/.npm1rc',
-          NPMRCInitialContent.content
-        );
+        Utils.Workspace.createFile('.npmrc', NPMRCInitialContent.content);
       },
     };
   }
@@ -23,7 +20,7 @@ export class Creator {
       command: 'create-pnpm-workspace-config',
       callback: (args: any) => {
         Utils.Workspace.createFile(
-          '/extension-tmp/pnpm-workspace.yaml',
+          'pnpm-workspace.yaml',
           WorkspaceYAMLInitialContent.content
         );
       },

@@ -9,25 +9,29 @@ import { LocaleFactory } from '../Locales';
  * move codelense here
  */
 export class Configure {
-  public static get ToggleCodelenseStatus(): ICommandRegistry {
+  public static get ToggleCodelenStatus(): ICommandRegistry {
     return {
-      command: 'enable-codelense',
+      command: 'toggle-codelen-status',
       callback: async (args: any) => {
-        ExtensionConfiguration.codeLen.write(true);
+        const raw = ExtensionConfiguration.codelen.read();
+
+        const res = await Utils.Workspace.createStatusSelector('codelen', raw);
+
+        raw !== res && ExtensionConfiguration.codelen.write(res);
       },
     };
   }
 
   public static get ToggleHoverProviderStatus(): ICommandRegistry {
     return {
-      command: 'sample-command2',
+      command: '',
       callback: async (args: any) => {},
     };
   }
 
   public static get ToggleCompletionProviderStatus(): ICommandRegistry {
     return {
-      command: 'sample-command3',
+      command: '',
       callback: async (args: any) => {},
     };
   }
@@ -44,6 +48,7 @@ export class Configure {
             }
 
             ExtensionConfiguration.locale.write(<LocaleType>v);
+
             vscode.window.showInformationMessage(
               LocaleFactory.ToggleLocaleTip(<LocaleType>v)
             );

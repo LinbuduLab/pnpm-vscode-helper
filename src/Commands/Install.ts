@@ -16,6 +16,7 @@ export class Install {
         Utils.Terminal.createTerminalForDepsInstallation(
           dependenciesWithVersion
         );
+
         Utils.Terminal.createTerminalForDevDepsInstallation(
           devDependenciesWithVersion
         );

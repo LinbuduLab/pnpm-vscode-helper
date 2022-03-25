@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { CodeLen } from '../Commands/CodeLen';
+import { CodeLen } from '../Commands/Codelen';
 import { ExtensionConfiguration } from '../Configurations';
 import { Utils } from '../Utils';
 
@@ -33,7 +33,7 @@ export class WorkspaceProtocolCodelenseProvider
   ): vscode.CodeLens[] | Thenable<vscode.CodeLens[]> {
     this.codeLenses = [];
 
-    if (!ExtensionConfiguration.codeLen.read()) {
+    if (!ExtensionConfiguration.codelen.read()) {
       return this.codeLenses;
     }
 
@@ -59,7 +59,7 @@ export class WorkspaceProtocolCodelenseProvider
     codeLens: vscode.CodeLens,
     token: vscode.CancellationToken
   ) {
-    if (!ExtensionConfiguration.codeLen.read()) {
+    if (!ExtensionConfiguration.codelen.read()) {
       return null;
     }
 

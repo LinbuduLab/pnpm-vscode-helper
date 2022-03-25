@@ -9,6 +9,7 @@ import { PackageJson } from 'type-fest';
 import { IParsedPNPMWorkspaceYAMLContent } from '../Commands/Scanner';
 import { ExtensionConfiguration } from '../Configurations';
 import { Utils } from '../Utils';
+import { FeatureStatusType, FEATURE_STATUS_ITEMS } from '../Constants/Shared';
 
 export class WorkspaceUtils {
   public static resolveCurrentWorkspaceAbsolutePath() {
@@ -35,7 +36,9 @@ export class WorkspaceUtils {
     vscode.workspace.applyEdit(wsedit);
     vscode.workspace.openTextDocument(fileUri);
 
-    vscode.window.showInformationMessage(`Created file: ${filePath}`);
+    vscode.window.showInformationMessage(
+      `File ${filePath} created successfully.`
+    );
   }
 
   public static async createConfirmDialog(message: string): Promise<boolean> {
@@ -115,6 +118,16 @@ export class WorkspaceUtils {
     return packageInfos;
   }
 
+  public static async createStatusSelector(feature: string, current: boolean) {
+    const result = await vscode.window.showQuickPick(FEATURE_STATUS_ITEMS, {
+      placeHolder: `Disable/Enable ${feature}, current status: ${
+        current ? 'Enabled' : 'Disabled'
+      }`,
+    });
+
+    return result === 'enabled';
+  }
+
   public static async selectMultiplePackages(placeHolder?: string) {
     const workspacePackages =
       (await Utils.Workspace.collectWorkspacePackages()) ?? {};
@@ -125,6 +138,7 @@ export class WorkspaceUtils {
       vscode.window.showInformationMessage(
         'No packages found in current workspace'
       );
+      return;
     }
 
     const selectedTargetPackage = await vscode.window.showQuickPick(

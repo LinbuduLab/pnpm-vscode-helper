@@ -25,7 +25,7 @@ import {
 
 import { Utils } from './utils';
 import { RegisterHelper } from './Utils/RegisterHelper';
-import { CodeLen } from './Commands/CodeLen';
+import { CodeLen } from './Commands/Codelen';
 
 export class ExtensionRegistry {
   public static registerCheckDepsUpdateCommand(
@@ -38,7 +38,7 @@ export class ExtensionRegistry {
 
   public static registerCongifureCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(Configure.ToggleCodelenseStatus),
+      RegisterHelper.registerCommand(Configure.ToggleCodelenStatus),
       RegisterHelper.registerCommand(Configure.ToggleHoverProviderStatus),
       RegisterHelper.registerCommand(Configure.ToggleCompletionProviderStatus),
       RegisterHelper.registerCommand(Configure.ToggleLocaleProviderStatus)

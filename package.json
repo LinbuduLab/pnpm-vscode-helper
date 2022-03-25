@@ -46,23 +46,13 @@
         "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Codelens Handler",
+        "title": "Codelen Handler",
         "command": "pnpm-vscode-helper.codelensAction",
         "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Enable CodeLens",
-        "command": "pnpm-vscode-helper.enable-codelense",
-        "category": "PNPM VS Code Helper"
-      },
-      {
-        "title": "Disable Codelens",
-        "command": "pnpm-vscode-helper.disableCodeLens",
-        "category": "PNPM VS Code Helper"
-      },
-      {
-        "title": "Sync Project Workspace Info",
-        "command": "pnpm-vscode-helper.scan-workspace",
+        "title": "Disable/Enable Codelen",
+        "command": "pnpm-vscode-helper.toggle-codelen-status",
         "category": "PNPM VS Code Helper"
       },
       {

@@ -34,10 +34,10 @@ export class Install {
         const workspacePackagesChoices = Object.keys(workspacePackages);
 
         if (!workspacePackagesChoices.length) {
-          vscode.window.showInformationMessage(
-            'No packages found in current workspace'
-          );
+          Utils.Tips.NoPackageFoundTip();
+          return;
         }
+
         const selectedTargetPackages = await vscode.window.showQuickPick(
           workspacePackagesChoices,
           {

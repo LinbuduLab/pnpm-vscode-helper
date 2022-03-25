@@ -14,8 +14,8 @@ export const NPMRC_COMPLETION_ITEMS = <const>{
   'prefer-frozen-lockfile': BOOL_COMPLETION_ITEMS,
   registry: [
     'https://registry.npmjs.org/',
-    'https://registry.yarnpkg.com',
-    'https://registry.npmmirror.com',
+    'https://registry.yarnpkg.com/',
+    'https://registry.npmmirror.com/',
   ],
   'auto-install-peers': BOOL_COMPLETION_ITEMS,
   'strict-peer-dependencies': BOOL_COMPLETION_ITEMS,

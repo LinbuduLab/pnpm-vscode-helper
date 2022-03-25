@@ -24,14 +24,14 @@ export class Configure {
 
   public static get ToggleHoverProviderStatus(): ICommandRegistry {
     return {
-      command: '',
+      command: 'ToggleHoverProviderStatus',
       callback: async (args: any) => {},
     };
   }
 
   public static get ToggleCompletionProviderStatus(): ICommandRegistry {
     return {
-      command: '',
+      command: 'ToggleCompletionProviderStatus',
       callback: async (args: any) => {},
     };
   }

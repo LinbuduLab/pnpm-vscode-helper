@@ -8,7 +8,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // --- COMMAND START ---
   ExtensionRegistry.registerCheckDepsUpdateCommand(context);
-  ExtensionRegistry.registerCodeLenCommand(context);
+  ExtensionRegistry.registerCodeLensCommand(context);
+  ExtensionRegistry.registerRemoveDepsCommand(context);
   ExtensionRegistry.registerWorkspaceCommand(context);
   ExtensionRegistry.registerPrivateExtensionConfigCommand(context);
   ExtensionRegistry.registerCreatorCommand(context);
@@ -20,7 +21,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // --- PROVIDER START ---
   ExtensionRegistry.registerCompletionProviders(context);
-  ExtensionRegistry.registerCodeLensProvider(context);
+  ExtensionRegistry.registerCodelensProvider(context);
   ExtensionRegistry.registerHoverProvider(context);
   ExtensionRegistry.registerDefinitionProvider(context);
   // -- PROVIDER END ---

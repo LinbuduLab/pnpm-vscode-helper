@@ -86,8 +86,13 @@
         "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Upgrade package deps(use `pnpm update` command)",
+        "title": "Upgrade package deps(use pnpm update command)",
         "command": "pnpm-vscode-helper.built-in-upgrade",
+        "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Remove package deps",
+        "command": "pnpm-vscode-helper.remove-package-deps",
         "category": "PNPM VS Code Helper"
       }
     ],

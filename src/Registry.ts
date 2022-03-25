@@ -8,6 +8,7 @@ import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
 import { Upgrage } from './Commands/Upgrade';
+import { RemoveDeps } from './Commands/RemoveDeps';
 import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
 
 import { WorkspaceProtocolCodelenseProvider } from './Providers/WorkspaceProtocol.codelense';
@@ -29,6 +30,12 @@ import { RegisterHelper } from './Utils/RegisterHelper';
 import { CodeLen } from './Commands/Codelen';
 
 export class ExtensionRegistry {
+  public static registerRemoveDepsCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      RegisterHelper.registerCommand(RemoveDeps.SelectPackageDepsAndRemove)
+    );
+  }
+
   public static registerCheckDepsUpdateCommand(
     context: vscode.ExtensionContext
   ) {
@@ -47,7 +54,7 @@ export class ExtensionRegistry {
     );
   }
 
-  public static registerCodeLenCommand(context: vscode.ExtensionContext) {
+  public static registerCodeLensCommand(context: vscode.ExtensionContext) {
     RegisterHelper.registerCommand(CodeLen.CodeLenClickHandler);
   }
 
@@ -139,7 +146,7 @@ export class ExtensionRegistry {
     );
   }
 
-  public static registerCodeLensProvider(context: vscode.ExtensionContext) {
+  public static registerCodelensProvider(context: vscode.ExtensionContext) {
     vscode.languages.registerCodeLensProvider(
       '*',
       new WorkspaceProtocolCodelenseProvider()

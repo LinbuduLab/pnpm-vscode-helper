@@ -7,6 +7,7 @@ import { Configure } from './Commands/Configure';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
+import { Upgrage } from './Commands/Upgrade';
 import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
 
 import { WorkspaceProtocolCodelenseProvider } from './Providers/WorkspaceProtocol.codelense';
@@ -32,7 +33,8 @@ export class ExtensionRegistry {
     context: vscode.ExtensionContext
   ) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(CheckDepUpdates.Update)
+      RegisterHelper.registerCommand(CheckDepUpdates.Update),
+      RegisterHelper.registerCommand(Upgrage.BuiltInUpgrade)
     );
   }
 

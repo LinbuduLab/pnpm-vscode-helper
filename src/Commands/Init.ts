@@ -3,9 +3,9 @@ import { ICommandRegistry } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 
 export class Init {
-  public static get InitWithInteractive(): ICommandRegistry {
+  public static get InitInteractively(): ICommandRegistry {
     return {
-      command: 'init',
+      command: 'init-interactively',
       callback: async (args: any) => {},
     };
   }

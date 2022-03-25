@@ -84,6 +84,11 @@
         "title": "Check and update package deps",
         "command": "pnpm-vscode-helper.check-dep-updates",
         "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Upgrade package deps(use `pnpm update` command)",
+        "command": "pnpm-vscode-helper.built-in-upgrade",
+        "category": "PNPM VS Code Helper"
       }
     ],
     "configuration": {

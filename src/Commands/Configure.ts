@@ -7,6 +7,8 @@ import { LocaleFactory } from '../Locales';
 /**
  * disable for global or for current workspace...?
  * move codelense here
+ * - codelens
+ * - locale
  */
 export class Configure {
   public static get ToggleCodelenStatus(): ICommandRegistry {

@@ -4,6 +4,9 @@ import * as path from 'path';
 
 import { ICommandRegistry } from '../Utils/Typings';
 
+/**
+ * @deprecated
+ */
 export class ScanWorkspace {
   public static get Scan(): ICommandRegistry {
     return {

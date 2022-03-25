@@ -94,6 +94,11 @@
         "title": "Remove package deps",
         "command": "pnpm-vscode-helper.remove-package-deps",
         "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Publish package with interactive prompt",
+        "command": "pnpm-vscode-helper.publish-interactively",
+        "category": "PNPM VS Code Helper"
       }
     ],
     "configuration": {
@@ -154,6 +159,7 @@
     "@types/lodash": "^4.14.180",
     "@types/mocha": "^9.1.0",
     "@types/node": "14.x",
+    "@types/semver": "^7.3.9",
     "@types/vscode": "^1.65.0",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
@@ -171,6 +177,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "npm-check-updates": "^12.5.4",
-    "rc-parser": "^1.0.2"
+    "rc-parser": "^1.0.2",
+    "semver": "^7.3.5"
   }
 }

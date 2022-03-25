@@ -7,6 +7,7 @@ specifiers:
   '@types/lodash': ^4.14.180
   '@types/mocha': ^9.1.0
   '@types/node': 14.x
+  '@types/semver': ^7.3.9
   '@types/vscode': ^1.65.0
   '@typescript-eslint/eslint-plugin': ^5.12.1
   '@typescript-eslint/parser': ^5.12.1
@@ -21,6 +22,7 @@ specifiers:
   mocha: ^9.2.1
   npm-check-updates: ^12.5.4
   rc-parser: ^1.0.2
+  semver: ^7.3.5
   type-fest: ^2.12.0
   typescript: ^4.5.5
 
@@ -32,6 +34,7 @@ dependencies:
   lodash: 4.17.21
   npm-check-updates: 12.5.4
   rc-parser: 1.0.2
+  semver: 7.3.5
 
 devDependencies:
   '@types/glob': 7.2.0
@@ -40,6 +43,7 @@ devDependencies:
   '@types/lodash': 4.14.180
   '@types/mocha': 9.1.0
   '@types/node': 14.18.12
+  '@types/semver': 7.3.9
   '@types/vscode': 1.65.0
   '@typescript-eslint/eslint-plugin': 5.15.0_f2c49ce7d0e93ebcfdb4b7d25b131b28
   '@typescript-eslint/parser': 5.15.0_eslint@8.11.0+typescript@4.6.2
@@ -244,6 +248,10 @@ packages:
 
   /@types/node/14.18.12:
     resolution: {integrity: sha512-q4jlIR71hUpWTnGhXWcakgkZeHa3CCjcQcnuzU8M891BAWA2jHiziiWEPEkdS5pFsz7H9HJiy8BrK7tBRNrY7A==}
+    dev: true
+
+  /@types/semver/7.3.9:
+    resolution: {integrity: sha512-L/TMpyURfBkf+o/526Zb6kd/tchUP3iBDEPjqjb+U2MAJhVRxxrmr2fwpe08E7QsV7YLcpq0tUaQ9O9x97ZIxQ==}
     dev: true
 
   /@types/vscode/1.65.0:

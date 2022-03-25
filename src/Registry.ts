@@ -9,6 +9,7 @@ import { Creator } from './Commands/Creator';
 import { Install } from './Commands/Install';
 import { Upgrage } from './Commands/Upgrade';
 import { RemoveDeps } from './Commands/RemoveDeps';
+import { Publish } from './Commands/Publish';
 import { PrivateExtensionConfigure } from './Commands/PrivateConfigure';
 
 import { WorkspaceProtocolCodelenseProvider } from './Providers/WorkspaceProtocol.codelense';
@@ -30,6 +31,11 @@ import { RegisterHelper } from './Utils/RegisterHelper';
 import { CodeLen } from './Commands/Codelen';
 
 export class ExtensionRegistry {
+  public static registerPublishCommand(context: vscode.ExtensionContext) {
+    context.subscriptions.push(
+      RegisterHelper.registerCommand(Publish.PublishInteractively)
+    );
+  }
   public static registerRemoveDepsCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       RegisterHelper.registerCommand(RemoveDeps.SelectPackageDepsAndRemove)

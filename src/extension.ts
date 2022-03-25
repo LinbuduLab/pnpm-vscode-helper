@@ -9,6 +9,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // --- COMMAND START ---
   ExtensionRegistry.registerCheckDepsUpdateCommand(context);
   ExtensionRegistry.registerCodeLensCommand(context);
+  ExtensionRegistry.registerPublishCommand(context);
   ExtensionRegistry.registerRemoveDepsCommand(context);
   ExtensionRegistry.registerWorkspaceCommand(context);
   ExtensionRegistry.registerPrivateExtensionConfigCommand(context);

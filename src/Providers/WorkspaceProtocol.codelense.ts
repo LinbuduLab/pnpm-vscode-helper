@@ -48,9 +48,23 @@ export class WorkspaceProtocolCodelenseProvider
         position,
         new RegExp(this.regex)
       );
-      console.log('xxxx', line, indexOf, position, range);
+
+      const { text, firstNonWhitespaceCharacterIndex } = line;
+
+      const pair = text.slice(firstNonWhitespaceCharacterIndex);
+
+      const [packageIdentifier] = pair.split(':');
+
       if (range) {
-        this.codeLenses.push(new vscode.CodeLens(range));
+        this.codeLenses.push(
+          new vscode.CodeLens(range, {
+            title: 'Click to open workspace package folder',
+            command: Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
+            arguments: [
+              packageIdentifier.replaceAll("'", '').replaceAll('"', ''),
+            ],
+          })
+        );
       }
     }
     return this.codeLenses;
@@ -64,12 +78,6 @@ export class WorkspaceProtocolCodelenseProvider
       return null;
     }
 
-    codeLens.command = {
-      title: 'Click to open workspace package folder',
-      // tooltip: 'Tooltip provided by sample extension',
-      command: Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
-      arguments: ['cra-ts'],
-    };
     return codeLens;
   }
 }

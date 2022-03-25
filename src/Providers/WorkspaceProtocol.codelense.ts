@@ -22,9 +22,9 @@ export class WorkspaceProtocolCodelenseProvider
     this._onDidChangeCodeLenses.event;
 
   constructor() {
-    // vscode.workspace.onDidChangeConfiguration((_) => {
-    //   this._onDidChangeCodeLenses.fire();
-    // });
+    vscode.workspace.onDidChangeConfiguration((_) => {
+      this._onDidChangeCodeLenses.fire();
+    });
   }
 
   public provideCodeLenses(
@@ -48,6 +48,7 @@ export class WorkspaceProtocolCodelenseProvider
         position,
         new RegExp(this.regex)
       );
+      console.log('xxxx', line, indexOf, position, range);
       if (range) {
         this.codeLenses.push(new vscode.CodeLens(range));
       }

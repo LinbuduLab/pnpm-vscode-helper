@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
-import { ICommandRegistry } from '../Utils/Typings';
-import { Utils } from '../Utils';
-import { ExtensionConfiguration } from '../Configurations';
 import * as ncu from 'npm-check-updates';
+
+import { Utils } from '../Utils';
+import type { ICommandRegistry } from '../Utils/Typings';
 
 export class CheckDepUpdates {
   public static get Update(): ICommandRegistry {
@@ -10,10 +10,11 @@ export class CheckDepUpdates {
       command: 'check-dep-updates',
       callback: async (args: any) => {
         const selectedInfo = await Utils.Workspace.selectMultiplePackages(
-          'No packages found in current workspace'
+          'Select workspace packages you want to update its dependencies:'
         );
 
         if (!selectedInfo) {
+          Utils.Tips.NoPackageSelectedTip();
           return;
         }
 
@@ -23,27 +24,31 @@ export class CheckDepUpdates {
           return ncu.run({
             cwd: workspacePackages[p],
             upgrade: true,
-            // registry: 'https://registry.npmmirror.com',
           });
         });
 
         vscode.window.withProgress(
           {
             location: vscode.ProgressLocation.Notification,
-            title: 'Updating',
-            // cancellable: true,
+            title: 'Checking and Updating Dependencies...',
+            cancellable: true,
           },
           (progress, token) => {
-            // token.onCancellationRequested(() => {
-            //   vscode.window.showInformationMessage(`Update cancelled`);
-            // });
+            return new Promise((resolve, reject) => {
+              token.onCancellationRequested(() => {
+                reject();
+              });
 
-            return Promise.all(promises);
+              Promise.all(promises).then(() => {
+                vscode.window.showInformationMessage(
+                  `Deps updated for packages: ${selectedTargetPackage.join(
+                    ', '
+                  )}`
+                );
+                resolve(void 0);
+              });
+            });
           }
-        );
-
-        vscode.window.showInformationMessage(
-          `Deps updated for packages: ${selectedTargetPackage.join(', ')}`
         );
       },
     };

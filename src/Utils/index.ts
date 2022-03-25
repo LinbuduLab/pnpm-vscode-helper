@@ -5,9 +5,9 @@ import { WorkspaceUtils } from './Workspace';
 import { TerminalUtils } from './Terminal';
 import { Logger } from './Logger';
 import { ProgressUtils } from './Progress';
+import { Tips } from './Tips';
 import { Matcher } from './Matcher';
 import { PackageUtils } from './Package';
-
 import { Constants } from '../Constants';
 
 export class Utils {
@@ -22,6 +22,8 @@ export class Utils {
   public static Matcher = Matcher;
 
   public static Package = PackageUtils;
+
+  public static Tips = Tips;
 
   public static composeCommand(command: string) {
     return `${Constants.ExtensionIdentifier}.${command}`;
@@ -56,5 +58,3 @@ export class Utils {
     };
   }
 }
-
-export class ProjectWorkspaceScanner {}

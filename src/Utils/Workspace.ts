@@ -56,7 +56,9 @@ export class WorkspaceUtils {
     );
 
     if (!pnpmWorkspaceConfigFile.length) {
-      vscode.window.showWarningMessage('file pnpm-workspace.yaml is not found');
+      vscode.window.showWarningMessage(
+        'File pnpm-workspace.yaml not found in current workspace.'
+      );
       return;
     }
 

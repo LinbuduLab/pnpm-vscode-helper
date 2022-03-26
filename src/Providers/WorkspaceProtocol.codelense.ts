@@ -58,15 +58,14 @@ export class WorkspaceProtocolCodelenseProvider
       const pair = text.slice(firstNonWhitespaceCharacterIndex);
 
       const [packageIdentifier] = pair.split(':');
+      console.log('packageIdentifier: ', packageIdentifier);
 
       if (range) {
         this.codeLenses.push(
           new vscode.CodeLens(range, {
             title: 'Click to open workspace package folder',
             command: Utils.composeCommand(CodeLen.CodeLenClickHandler.command),
-            arguments: [
-              packageIdentifier.replaceAll("'", '').replaceAll('"', ''),
-            ],
+            arguments: [packageIdentifier.replaceAll('"', '')],
           })
         );
       }
@@ -78,6 +77,7 @@ export class WorkspaceProtocolCodelenseProvider
     codeLens: vscode.CodeLens,
     token: vscode.CancellationToken
   ) {
+    console.log('codeLens: ', codeLens);
     if (!ExtensionConfiguration.codelen.read()) {
       return null;
     }

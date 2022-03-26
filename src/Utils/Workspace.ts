@@ -92,8 +92,9 @@ export class WorkspaceUtils {
       yaml.load(content.toString())
     );
 
-    const { ignorePatterns, matcherPatterns } = groupBy(parsed.packages, (p) =>
-      p.startsWith('!') ? 'ignorePatterns' : 'matcherPatterns'
+    const { ignorePatterns = [], matcherPatterns = [] } = groupBy(
+      parsed.packages,
+      (p) => (p.startsWith('!') ? 'ignorePatterns' : 'matcherPatterns')
     );
 
     const packageDirs: string[] = [];
@@ -114,9 +115,9 @@ export class WorkspaceUtils {
       packageDirs.push(...result);
     }
 
-    vscode.window.showInformationMessage(
-      `${packageDirs.length} packages found.`
-    );
+    // vscode.window.showInformationMessage(
+    //   `${packageDirs.length} packages found.`
+    // );
 
     for (const packageDir of packageDirs) {
       const packageJsonDir = path.posix.resolve(packageDir, 'package.json');
@@ -141,13 +142,16 @@ export class WorkspaceUtils {
   }
 
   public static async createStatusSelector(feature: string, current: boolean) {
-    const result = await vscode.window.showQuickPick(FEATURE_STATUS_ITEMS, {
-      placeHolder: `Disable/Enable ${feature}, current status: ${
-        current ? 'Enabled' : 'Disabled'
-      }`,
-    });
+    const result = <FeatureStatusType>((await vscode.window.showQuickPick(
+      FEATURE_STATUS_ITEMS,
+      {
+        placeHolder: `Enable/Disable ${feature}, current status: ${
+          current ? 'Enabled' : 'Disabled'
+        }`,
+      }
+    )) ?? 'enable');
 
-    return result === 'enabled';
+    return result === 'enable';
   }
 
   public static async selectMultiplePackages(placeHolder?: string) {

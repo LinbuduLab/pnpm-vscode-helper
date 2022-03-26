@@ -1,15 +1,17 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-
 import { Utils } from '../Utils';
 import type { ICommandRegistry } from '../Utils/Typings';
-import { ExtensionConfiguration } from '../Configurations';
 
 export class CodeLen {
   public static get CodeLenClickHandler(): ICommandRegistry {
     return {
       command: 'codelensAction',
       callback: async (packageName: string) => {
+        if (!packageName) {
+          return;
+        }
+
         const workspacePackages =
           (await Utils.Workspace.collectWorkspacePackages()) ?? {};
 
@@ -18,19 +20,19 @@ export class CodeLen {
           return;
         }
 
-        const opened = await vscode.workspace.openTextDocument(
-          vscode.Uri.from({
-            scheme: 'file',
-            path: path.posix.resolve(
-              workspacePackages[packageName],
-              'package.json'
-            ),
-          })
-        );
+        const target = vscode.Uri.from({
+          scheme: 'file',
+          path: path.posix.resolve(
+            workspacePackages[packageName],
+            'package.json'
+          ),
+        });
+
+        const opened = await vscode.workspace.openTextDocument(target);
 
         await vscode.window.showTextDocument(
           opened,
-          vscode.ViewColumn.Active,
+          vscode.ViewColumn.Beside,
           false
         );
       },

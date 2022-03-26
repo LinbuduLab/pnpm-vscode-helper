@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as ini from 'ini';
 import { BOOL_COMPLETION_ITEMS } from './Shared';
 
-export const NPMRC_COMPLETION_ITEMS = <const>{
+export const NPMRC_COMPLETION_ITEMS = {
   hoist: BOOL_COMPLETION_ITEMS,
   'hoist-pattern': ['[]', "['*']"],
   'public-hoist-pattern': ['[]'],
@@ -33,26 +33,29 @@ export class NPMRCCompletionItemss {
 
 export class NPMRCInitialContent {
   public static get content(): string {
-    const raw: Record<NPMRCKeyUnions, any> = {
+    const raw: Partial<Record<NPMRCKeyUnions, any>> = {
       hoist: true,
-      'hoist-pattern': ['*'],
-      'public-hoist-pattern': [
-        '*types*',
-        '*eslint*',
-        '@prettier/plugin-*',
-        '*prettier-plugin-*',
-      ],
+      // FIXME:
+      // 'hoist-pattern': ['*'],
+      // 'public-hoist-pattern': [
+      //   '*types*',
+      //   '*eslint*',
+      //   '@prettier/plugin-*',
+      //   '*prettier-plugin-*',
+      // ],
       'shamefully-hoist': false,
       'store-dir': '~/.pnpm-store',
       'modules-dir': 'node_modules',
       'virtual-store-dir': 'node_modules/.pnpm',
       lockfile: true,
       'prefer-frozen-lockfile': true,
-      registry: ' https://registry.npmjs.org/',
+      registry: 'https://registry.npmjs.org/',
       'auto-install-peers': false,
       'strict-peer-dependencies': false,
     };
 
-    return ini.stringify(raw);
+    return ini.stringify(raw, {
+      whitespace: false,
+    });
   }
 }

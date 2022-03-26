@@ -1,8 +1,11 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { Utils } from '../Utils';
-import { PackageJsonHoverTips } from '../Constants/PackageJson';
+// import {  } from '../Constants/NPMRC';
 
+/**
+ * not ready
+ */
 export class NPMRCHoverProvider implements vscode.HoverProvider {
   public static selector: vscode.DocumentSelector = {
     pattern: '/**/.npmrc',
@@ -20,14 +23,16 @@ export class NPMRCHoverProvider implements vscode.HoverProvider {
 
     const purifiedWord = word.replaceAll('"', '');
 
-    const isPNPMSpecifiedConfigField =
-      (Utils.Matcher.composePNPMConfigFieldMatcher(word).test(json) &&
-        PackageJsonHoverTips.supportedConfigFields.includes(purifiedWord)) ||
-      PackageJsonHoverTips.supportedConfigRootFields.includes(purifiedWord);
+    // const isPNPMSpecifiedConfigField =
+    //   (Utils.Matcher.composePNPMConfigFieldMatcher(word).test(json) &&
+    //     PackageJsonHoverTips.supportedConfigFields.includes(purifiedWord)) ||
+    //   PackageJsonHoverTips.supportedConfigRootFields.includes(purifiedWord);
 
-    const hoverTips = PackageJsonHoverTips.ConfigFieldHoverTip();
-    const matched = hoverTips[<keyof typeof hoverTips>purifiedWord];
+    // const hoverTips = PackageJsonHoverTips.ConfigFieldHoverTip();
+    // const matched = hoverTips[<keyof typeof hoverTips>purifiedWord];
+    // console.log('matched: ', hoverTips, purifiedWord, matched);
 
-    return new vscode.Hover('matched');
+    // return new vscode.Hover(matched);
+    return null;
   }
 }

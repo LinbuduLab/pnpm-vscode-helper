@@ -116,11 +116,9 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
 
 ## Providers
 
-### Hover Providers
-
-### Completion Providers
-
-### Codelense Providers
+- In `.npmrc`, this extension provides completion for both key and value(only pnpm specified configurations are included).
+- In `pnpm-workspace.yaml`, this extension provides key completions and hovers.
+- In `package.json`, the dependency item with `workspace:` protocol will have `Click to open workspace package folder` codelen, you can click it to open target package.
 
 ## Configurations
 

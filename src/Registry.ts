@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 
 import { Workspace } from './Commands/Workspace';
 import { ScanWorkspace } from './Commands/Scanner';
-import { CheckDepUpdates } from './Commands/CheckDepUpdates';
 import { Configure } from './Commands/Configure';
 import { Package } from './Commands/Package';
 import { Creator } from './Commands/Creator';
@@ -42,21 +41,15 @@ export class ExtensionRegistry {
     );
   }
 
-  public static registerCheckDepsUpdateCommand(
-    context: vscode.ExtensionContext
-  ) {
+  public static registerUpdateDepsCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(CheckDepUpdates.Update),
       RegisterHelper.registerCommand(Upgrage.BuiltInUpgrade)
     );
   }
 
   public static registerCongifureCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(Configure.ToggleCodelenStatus),
-      RegisterHelper.registerCommand(Configure.ToggleHoverProviderStatus),
-      RegisterHelper.registerCommand(Configure.ToggleCompletionProviderStatus),
-      RegisterHelper.registerCommand(Configure.ToggleLocaleProviderStatus)
+      RegisterHelper.registerCommand(Configure.ToggleCodelenStatus)
     );
   }
 
@@ -98,8 +91,8 @@ export class ExtensionRegistry {
 
   public static registerPackageCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(Package.SelectPackage),
-      RegisterHelper.registerCommand(Package.GroupWorkspacePackages)
+      RegisterHelper.registerCommand(Package.SelectPackage)
+      // RegisterHelper.registerCommand(Package.GroupWorkspacePackages)
     );
   }
 
@@ -154,7 +147,7 @@ export class ExtensionRegistry {
 
   public static registerCodelensProvider(context: vscode.ExtensionContext) {
     vscode.languages.registerCodeLensProvider(
-      '*',
+      'json',
       new WorkspaceProtocolCodelenseProvider()
     );
   }

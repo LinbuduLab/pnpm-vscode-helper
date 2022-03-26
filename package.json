@@ -16,16 +16,6 @@
   "contributes": {
     "commands": [
       {
-        "title": "Create private extension configuration used by pnpm init command.",
-        "command": "pnpm-vscode-helper.create-private-extension-config",
-        "category": "PNPM VS Code Helper"
-      },
-      {
-        "title": "Remove private extension configuration used by pnpm init command.",
-        "command": "pnpm-vscode-helper.remove-private-extension-config",
-        "category": "PNPM VS Code Helper"
-      },
-      {
         "title": "Install workspace root dependencies only.",
         "command": "pnpm-vscode-helper.install-workspace-root-deps",
         "category": "PNPM VS Code Helper"
@@ -38,11 +28,6 @@
       {
         "title": "Check deps update for selected packages",
         "command": "check-deps-update-for-selected-packages",
-        "category": "PNPM VS Code Helper"
-      },
-      {
-        "title": "Toggle Locale(切换语言，暂不可用)",
-        "command": "pnpm-vscode-helper.toggleLocale",
         "category": "PNPM VS Code Helper"
       },
       {
@@ -73,16 +58,6 @@
       {
         "title": "Create extra workspace package scripts (current workspace only)",
         "command": "pnpm-vscode-helper.create-extra-workspace-scripts",
-        "category": "PNPM VS Code Helper"
-      },
-      {
-        "title": "Grouping workspace packages",
-        "command": "pnpm-vscode-helper.grouping-packages",
-        "category": "PNPM VS Code Helper"
-      },
-      {
-        "title": "Check and update package deps",
-        "command": "pnpm-vscode-helper.check-dep-updates",
         "category": "PNPM VS Code Helper"
       },
       {

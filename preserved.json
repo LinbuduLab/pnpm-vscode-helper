@@ -1,0 +1,26 @@
+{
+  "contributes": {
+    "commands": [
+      {
+        "title": "Create private extension configuration used by pnpm init command.",
+        "command": "pnpm-vscode-helper.create-private-extension-config",
+        "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Remove private extension configuration used by pnpm init command.",
+        "command": "pnpm-vscode-helper.remove-private-extension-config",
+        "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Grouping workspace packages",
+        "command": "pnpm-vscode-helper.grouping-packages",
+        "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Check and update package deps",
+        "command": "pnpm-vscode-helper.check-dep-updates",
+        "category": "PNPM VS Code Helper"
+      }
+    ]
+  }
+}

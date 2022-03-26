@@ -37,6 +37,7 @@ export class ExtensionRegistry {
   }
   public static registerRemoveDepsCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
+      RegisterHelper.registerCommand(RemoveDeps.SelectWorkspaceDepsAndRemove),
       RegisterHelper.registerCommand(RemoveDeps.SelectPackageDepsAndRemove)
     );
   }

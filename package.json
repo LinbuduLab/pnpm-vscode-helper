@@ -2,7 +2,9 @@
   "name": "pnpm-vscode-helper",
   "displayName": "pnpm-vscode-helper",
   "description": "vscode extension for pnpm and pnpm workspace",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "icon": "assets/pnpm-logo.png",
+  "publisher": "linbudu",
   "engines": {
     "vscode": "^1.65.0"
   },
@@ -10,8 +12,12 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/LinbuduLab/pnpm-vscode-helper"
+  },
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

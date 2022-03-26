@@ -8,6 +8,13 @@ export class Install {
     return {
       command: 'install-workspace-root-deps',
       callback: async (args: any) => {
+        const insideWorkspace = await Utils.Workspace.checkInsidePNPMWorkspace(
+          true
+        );
+        if (!insideWorkspace) {
+          return;
+        }
+
         const { dependencies = {}, devDependencies = {} } =
           Utils.readPackageJson();
         const { dependenciesWithVersion, devDependenciesWithVersion } =
@@ -28,6 +35,13 @@ export class Install {
     return {
       command: 'install-selected-packages-deps',
       callback: async (args: any) => {
+        const insideWorkspace = await Utils.Workspace.checkInsidePNPMWorkspace(
+          true
+        );
+        if (!insideWorkspace) {
+          return;
+        }
+
         const workspacePackages =
           (await Utils.Workspace.collectWorkspacePackages()) ?? {};
 

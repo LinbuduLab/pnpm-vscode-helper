@@ -27,13 +27,17 @@ export class WorkspaceProtocolCodelenseProvider
     });
   }
 
-  public provideCodeLenses(
+  public async provideCodeLenses(
     document: vscode.TextDocument,
     token: vscode.CancellationToken
-  ): vscode.CodeLens[] | Thenable<vscode.CodeLens[]> {
+  ): Promise<vscode.CodeLens[]> {
     this.codeLenses = [];
 
     if (!ExtensionConfiguration.codelen.read()) {
+      return this.codeLenses;
+    }
+
+    if (!(await Utils.Workspace.checkInsidePNPMWorkspace())) {
       return this.codeLenses;
     }
 

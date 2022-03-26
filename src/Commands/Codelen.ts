@@ -33,7 +33,6 @@ export class CodeLen {
           vscode.ViewColumn.Active,
           false
         );
-        // try open package.json main > ?
       },
     };
   }

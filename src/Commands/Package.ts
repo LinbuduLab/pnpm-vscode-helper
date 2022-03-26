@@ -4,10 +4,8 @@ import { ICommandRegistry, PackageFilterType } from '../Utils/Typings';
 import { ExtensionConfiguration } from '../Configurations';
 import * as path from 'path';
 import { PackageJson } from 'type-fest';
-import { uniq } from 'lodash';
+import { uniq, uniqBy } from 'lodash';
 export class Package {
-  // todo: use selected package scripts
-  // public static scripts: string[] = ['dev', 'start', 'build', 'install'];
   public static scripts: string[] = [];
 
   public static operations: PackageFilterType[] = [
@@ -22,6 +20,14 @@ export class Package {
     return {
       command: 'select-workspace-package',
       callback: async (args: any) => {
+        const insideWorkspace = await Utils.Workspace.checkInsidePNPMWorkspace(
+          true
+        );
+
+        if (!insideWorkspace) {
+          return;
+        }
+
         const workspacePackages =
           (await Utils.Workspace.collectWorkspacePackages()) ?? {};
 
@@ -59,12 +65,23 @@ export class Package {
           JSON.parse(packageJsonContent.toString())
         );
 
+        const scriptChoices: vscode.QuickPickItem[] = [
+          ...Object.keys(scripts).map((s) => {
+            return {
+              label: s,
+              description: 'package script',
+            };
+          }),
+          ...ExtensionConfiguration.extraWorkspaceScript.read().map((s) => {
+            return {
+              label: s,
+              description: 'extra workspace scripts',
+            };
+          }),
+        ];
+
         const selectedScript = await vscode.window.showQuickPick(
-          uniq(
-            Package.scripts
-              .concat(ExtensionConfiguration.extraWorkspaceScript.read())
-              .concat(Object.keys(scripts))
-          ),
+          uniqBy(scriptChoices, (c) => c.label),
           {
             title: 'Select project script',
             placeHolder: `Selected project: ${selectedTargetPackage}`,
@@ -88,7 +105,7 @@ export class Package {
 
         Utils.Terminal.createTerminalForScriptExecution(
           selectedTargetPackage,
-          selectedScript,
+          selectedScript.label,
           selectedOperation
         );
       },

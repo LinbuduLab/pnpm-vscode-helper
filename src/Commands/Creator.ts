@@ -9,8 +9,8 @@ export class Creator {
   public static get CreateNPMRCConfig(): ICommandRegistry {
     return {
       command: 'create-npm-rc-config',
-      callback: (args: any) => {
-        Utils.Workspace.createFile('.npmrc', NPMRCInitialContent.content);
+      callback: async (args: any) => {
+        await Utils.Workspace.createFile('.npmrc', NPMRCInitialContent.content);
       },
     };
   }
@@ -18,8 +18,8 @@ export class Creator {
   public static get CreatePNPMWorkspaceConfig(): ICommandRegistry {
     return {
       command: 'create-pnpm-workspace-config',
-      callback: (args: any) => {
-        Utils.Workspace.createFile(
+      callback: async (args: any) => {
+        await Utils.Workspace.createFile(
           'pnpm-workspace.yaml',
           WorkspaceYAMLInitialContent.content
         );

@@ -24,9 +24,9 @@ export class Install {
           dependenciesWithVersion
         );
 
-        // Utils.Terminal.createTerminalForDevDepsInstallation(
-        //   devDependenciesWithVersion
-        // );
+        Utils.Terminal.createTerminalForDevDepsInstallation(
+          devDependenciesWithVersion
+        );
       },
     };
   }

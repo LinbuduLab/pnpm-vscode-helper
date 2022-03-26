@@ -43,17 +43,17 @@ export class WorkspaceUtils {
     return `${workDir}/node_modules/${moduleName.replace(/"/g, '')}`;
   }
 
-  public static createFile(filePath: string, fileContent: string) {
+  public static async createFile(filePath: string, fileContent: string) {
     const wsedit = new vscode.WorkspaceEdit();
     const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
-    const fileUri = vscode.Uri.file(wsPath + filePath);
+    const fileUri = vscode.Uri.file(wsPath + '/' + filePath);
 
     wsedit.createFile(fileUri, { ignoreIfExists: true });
 
     wsedit.insert(fileUri, new vscode.Position(0, 0), fileContent);
 
-    vscode.workspace.applyEdit(wsedit);
-    vscode.workspace.openTextDocument(fileUri);
+    await vscode.workspace.applyEdit(wsedit);
+    await vscode.workspace.openTextDocument(fileUri);
 
     vscode.window.showInformationMessage(
       `File ${filePath} created successfully.`

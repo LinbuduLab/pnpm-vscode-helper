@@ -11,6 +11,7 @@ import { IParsedPNPMWorkspaceYAMLContent } from '../Commands/Scanner';
 import { ExtensionConfiguration } from '../Configurations';
 import { Utils } from '../Utils';
 import { FeatureStatusType, FEATURE_STATUS_ITEMS } from '../Constants/Shared';
+import { groupBy } from 'lodash';
 
 export class WorkspaceUtils {
   public static async checkInsidePNPMWorkspace(showMessage = false) {
@@ -91,12 +92,14 @@ export class WorkspaceUtils {
       yaml.load(content.toString())
     );
 
-    const packagesDirPatterns = parsed.packages;
+    const { ignorePatterns, matcherPatterns } = groupBy(parsed.packages, (p) =>
+      p.startsWith('!') ? 'ignorePatterns' : 'matcherPatterns'
+    );
 
     const packageDirs: string[] = [];
     const packageInfos: Record<string, string> = {};
 
-    for (const dirPattern of packagesDirPatterns) {
+    for (const dirPattern of matcherPatterns) {
       const wsPath = Utils.Workspace.resolveCurrentWorkspaceAbsolutePath();
 
       const result = globby.sync(`${dirPattern}`, {
@@ -105,6 +108,7 @@ export class WorkspaceUtils {
         deep: 1,
         onlyDirectories: true,
         absolute: true,
+        ignore: ignorePatterns,
       });
 
       packageDirs.push(...result);

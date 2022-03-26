@@ -77,7 +77,7 @@
       },
       {
         "title": "Remove package deps",
-        "command": "pnpm-vscode-helper.remove-package-deps",
+        "command": "pnpm-vscode-helper.remove-workspace-package-deps",
         "category": "PNPM VS Code Helper"
       },
       {

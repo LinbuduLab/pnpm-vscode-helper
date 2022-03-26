@@ -13,6 +13,7 @@ export class RemoveDeps {
       callback: async (args: any) => {
         const workspaceRootPath =
           vscode.workspace.workspaceFolders![0].uri.fsPath;
+
         const workspaceRootPackageJsonPath = path.posix.resolve(
           workspaceRootPath,
           'package.json'
@@ -78,9 +79,13 @@ export class RemoveDeps {
 
   public static get SelectPackageDepsAndRemove(): ICommandRegistry {
     return {
-      command: 'remove-package-deps',
+      command: 'remove-workspace-package-deps',
       callback: async (args: any) => {
-        if (!(await Utils.Workspace.checkInsidePNPMWorkspace(true))) {
+        const insideWorkspace = await Utils.Workspace.checkInsidePNPMWorkspace(
+          true
+        );
+
+        if (!insideWorkspace) {
           return;
         }
 

@@ -21,7 +21,7 @@ Also, you can use `Ctrl(Command) + Shift + X` to open VS Code Extension Tab, and
 - pnpm workspace configuration hover & completions.
 - select from your workspace packages and run scripts with easy filtering.
 - upgrade or remove your workspace root / workspace packages dependencies.
-- publish your plain node package(as multirepo) oand workspace packages(as monorepo) with interactive prompt.
+- publish your plain node package(as multirepo) and workspace packages(as monorepo) with interactive prompt.
 - navigate to a workspace package from its dependent by `workspace:` protocol.
 
 ## Commands
@@ -34,14 +34,14 @@ See [Configure](##Configurations) for more details.
 
 ### Create
 
-Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm specified configuration and default value.
-
 - `pnpm-vscode-helper.create-npm-rc-config`
 - `pnpm-vscode-helper.create-pnpm-workspace-config`
 
+Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm specified configuration and default value.
+
 ### Install
 
-- `pnpm-vscode-helper.install-workspace-root-deps` 
+- `pnpm-vscode-helper.install-workspace-root-deps`
 
   Install workspace root dependencies only(as pnpm doesnot support this, we collect dependencies from workspace root and install them).
 
@@ -129,8 +129,3 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
 ## License
 
 [MIT](LICENSE)
-
-
-
-- pnpm-vscode-helper.
-- pnpm-vscode-helper.

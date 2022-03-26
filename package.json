@@ -81,8 +81,13 @@
         "category": "PNPM VS Code Helper"
       },
       {
-        "title": "Publish package with interactive prompt",
-        "command": "pnpm-vscode-helper.publish-interactively",
+        "title": "Publish node package with interactive prompt",
+        "command": "pnpm-vscode-helper.publish-node-package",
+        "category": "PNPM VS Code Helper"
+      },
+      {
+        "title": "Publish workspace package with interactive prompt",
+        "command": "pnpm-vscode-helper.publish-workspace-package",
         "category": "PNPM VS Code Helper"
       }
     ],

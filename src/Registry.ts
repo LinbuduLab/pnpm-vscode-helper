@@ -32,7 +32,8 @@ import { CodeLen } from './Commands/Codelen';
 export class ExtensionRegistry {
   public static registerPublishCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(Publish.PublishInteractively)
+      RegisterHelper.registerCommand(Publish.PublishNodePackage),
+      RegisterHelper.registerCommand(Publish.PublishWorkspacePackage)
     );
   }
   public static registerRemoveDepsCommand(context: vscode.ExtensionContext) {

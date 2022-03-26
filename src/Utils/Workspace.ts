@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as yaml from 'js-yaml';
 import * as globby from 'globby';
 import * as path from 'path';
+import * as fs from 'fs-extra';
 import * as ini from 'ini';
 
 import { PackageJson } from 'type-fest';
@@ -12,6 +13,23 @@ import { Utils } from '../Utils';
 import { FeatureStatusType, FEATURE_STATUS_ITEMS } from '../Constants/Shared';
 
 export class WorkspaceUtils {
+  public static async checkInsidePNPMWorkspace(showMessage = false) {
+    const pnpmWorkspaceConfigFile = path.posix.resolve(
+      vscode.workspace.workspaceFolders![0].uri.fsPath,
+      'pnpm-workspace.yaml'
+    );
+
+    if (!fs.existsSync(pnpmWorkspaceConfigFile)) {
+      showMessage &&
+        vscode.window.showInformationMessage(
+          'pnpm-workspace.yaml not found in current project, workspace related commands not available.'
+        );
+      return false;
+    }
+
+    return true;
+  }
+
   public static resolveCurrentWorkspaceAbsolutePath() {
     const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
     return wsPath;

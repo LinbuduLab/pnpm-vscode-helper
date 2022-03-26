@@ -59,9 +59,12 @@ export class RemoveDeps {
           return;
         }
 
-        const command = `pnpm remove ${selectedRemoveDeps.join(
-          ' '
-        )} --workspace-root`;
+        const insideWorkspace =
+          await Utils.Workspace.checkInsidePNPMWorkspace();
+
+        const command = `pnpm remove ${selectedRemoveDeps.join(' ')} ${
+          insideWorkspace ? '--workspace-root' : ''
+        }`;
 
         const commandTerminal =
           vscode.window.createTerminal(`PNPM VSCode Helper`);
@@ -77,6 +80,10 @@ export class RemoveDeps {
     return {
       command: 'remove-package-deps',
       callback: async (args: any) => {
+        if (!(await Utils.Workspace.checkInsidePNPMWorkspace(true))) {
+          return;
+        }
+
         const workspacePackages =
           (await Utils.Workspace.collectWorkspacePackages()) ?? {};
 

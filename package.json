@@ -61,6 +61,11 @@
         "category": "PNPM VS Code Helper"
       },
       {
+        "title": "Remove extra workspace package scripts (current workspace only)",
+        "command": "pnpm-vscode-helper.remove-extra-workspace-scripts",
+        "category": "PNPM VS Code Helper"
+      },
+      {
         "title": "Upgrade package deps(use pnpm update command)",
         "command": "pnpm-vscode-helper.built-in-upgrade",
         "category": "PNPM VS Code Helper"

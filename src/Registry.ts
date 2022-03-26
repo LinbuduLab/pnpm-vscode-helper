@@ -60,7 +60,8 @@ export class ExtensionRegistry {
 
   public static registerWorkspaceCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-      RegisterHelper.registerCommand(Workspace.CreateExtraWorkspaceScripts)
+      RegisterHelper.registerCommand(Workspace.CreateExtraWorkspaceScripts),
+      RegisterHelper.registerCommand(Workspace.RemoveExtraWorkspaceScripts)
     );
   }
 

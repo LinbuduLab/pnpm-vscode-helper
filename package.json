@@ -2,7 +2,7 @@
   "name": "pnpm-vscode-helper",
   "displayName": "pnpm-vscode-helper",
   "description": "vscode extension for pnpm and pnpm workspace",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "icon": "assets/pnpm-logo.png",
   "publisher": "linbudu",
   "engines": {
@@ -122,7 +122,7 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "test-compile": "tsc -p ./"

@@ -7,6 +7,10 @@
 <h1 align="center"> pnpm-vscode-helper </h1>
 <p  align="center"><b>VS Code Extension for better DX with pnpm.</b></p>
 
+![Marketplace](https://img.shields.io/visual-studio-marketplace/v/linbudu.pnpm-vscode-helper.svg?label=Marketplace&style=for-the-badge&logo=visual-studio-code)
+![Installs](https://img.shields.io/visual-studio-marketplace/i/linbudu.pnpm-vscode-helper.svg?style=for-the-badge)
+![License](https://img.shields.io/github/license/LinbuduLab/pnpm-vscode-helper?style=for-the-badge)
+
 ## Quick Start
 
 - Type `Ctrl(Command) + Shift + P` to open workbench commands input.

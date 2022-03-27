@@ -22,5 +22,34 @@
         "category": "PNPM VS Code Helper"
       }
     ]
+  },
+  "configurations": {
+    "properties": {
+      "pnpm-vscode-helper.locale": {
+        "type": "string",
+        "default": "en-US"
+      },
+      "pnpm-vscode-helper.shamefullyHoist": {
+        "type": "boolean",
+        "default": false
+      },
+      "pnpm-vscode-helper.workspacePackageGroups": {
+        "type": "array",
+        "default": []
+      },
+      "pnpm-vscode-helper.privateExtConfig": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "default": ""
+          },
+          "email": {
+            "type": "string",
+            "default": ""
+          }
+        }
+      }
+    }
   }
 }

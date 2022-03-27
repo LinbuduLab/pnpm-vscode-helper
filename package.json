@@ -2,7 +2,7 @@
   "name": "pnpm-vscode-helper",
   "displayName": "pnpm-vscode-helper",
   "description": "vscode extension for pnpm and pnpm workspace",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "linbudu",
   "engines": {
     "vscode": "^1.65.0"

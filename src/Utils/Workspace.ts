@@ -48,6 +48,17 @@ export class WorkspaceUtils {
     const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
     const fileUri = vscode.Uri.file(wsPath + '/' + filePath);
 
+    const exist =
+      (await vscode.workspace.findFiles(filePath, '**/node_modules/**', 1))
+        .length > 0;
+
+    if (exist) {
+      vscode.window.showInformationMessage(
+        `File ${filePath} already exists, skip.`
+      );
+      return;
+    }
+
     wsedit.createFile(fileUri, { ignoreIfExists: true });
 
     wsedit.insert(fileUri, new vscode.Position(0, 0), fileContent);

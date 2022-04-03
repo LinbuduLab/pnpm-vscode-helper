@@ -49,7 +49,11 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
 
   Install workspace root dependencies only(as pnpm doesnot support this, we collect dependencies from workspace root and install them).
 
+  ![install-workspace-root-deps](assets/gif/install-workspace-root-deps.gif)
+
 - `pnpm-vscode-helper.install-selected-packages-deps`
+
+  ![nstall-selected-packages-deps](assets/gif/install-selected-package-deps.gif)
 
   Select a set of packages, and install dependencies for them.
 
@@ -67,6 +71,8 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
     - dependenciesOnly
     - dependentsOnly
 
+  ![select-package](assets/gif/select-package.gif)
+
 ### Publish
 
 - `pnpm-vscode-helper.publish-node-package`
@@ -79,6 +85,8 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
 - `pnpm-vscode-helper.publish-workspace-package`
 
   Similar to the `publish-node-package` command, but this command requires you to select a workspace package to release.
+
+  ![publish](assets/gif/publish-package.gif)
 
 ### Remove Deps
 
@@ -108,6 +116,8 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
     - prod
     - interactive
 
+  ![upgrade](assets/gif/upgrade.gif)
+
 ### Workspace
 
 - `pnpm-vscode-helper.create-extra-workspace-scripts`
@@ -123,6 +133,10 @@ Create `.npmrc` / `pnpm-workspace.yaml` file in current project root, with pnpm 
 - In `.npmrc`, this extension provides completion for both key and value(only pnpm specified configurations are included).
 - In `pnpm-workspace.yaml`, this extension provides key completions and hovers.
 - In `package.json`, the dependency item with `workspace:` protocol will have `Click to open workspace package folder` codelen, you can click it to open target package.
+
+![hover-completion](assets/gif/hover-completion.gif)
+
+![codelen](assets/gif/package-codelen.gif)
 
 ## Configurations
 
